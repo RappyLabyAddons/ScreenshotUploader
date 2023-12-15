@@ -1,7 +1,7 @@
 {
-  "example": {
+  "e": {
     "settings": {
-      "name": "ExampleAddon",
+      "name": "E Addon",
       "enabled": {
         "name": "Enabled"
       }
