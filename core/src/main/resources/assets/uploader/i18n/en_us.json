@@ -10,20 +10,27 @@
                 "entries": {
                     "zipline": "Zipline"
                 }
-
             },
-            "javaExceptions": {
-                "name": "Java Exceptions"
-            },
-            "ziplineKey": {
-                "name": "Zipline Token"
+            "zipline": {
+                "name": "Zipline Options",
+                "base": {
+                    "name": "Base URL",
+                    "description": "Scheme: §bhttp(s)://<base>\n§fExample: §bhttps://media.rappytv.com"
+                },
+                "auth": {
+                    "name": "Zipline Token"
+                }
             }
         },
         "upload": {
             "msg": "Screenshot uploaded! %s",
             "hover": "Clickable",
-            "copy": "[COPY URL]",
-            "error": "An exception was thrown!"
+            "copy": "[COPY URL]"
+        },
+        "toast": {
+            "error": "An error ocurred!",
+            "http": "The base must start with http:// or https://",
+            "slash": "The base must not end with a /"
         }
     }
 }

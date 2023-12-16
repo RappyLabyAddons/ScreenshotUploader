@@ -1,6 +1,7 @@
 package com.rappytv.uploader;
 
 import com.rappytv.uploader.api.uploaders.ZiplineUploader;
+import com.rappytv.uploader.config.UploaderConfig;
 import com.rappytv.uploader.listeners.ScreenshotListener;
 import net.labymod.api.addon.LabyAddon;
 import net.labymod.api.client.component.Component;

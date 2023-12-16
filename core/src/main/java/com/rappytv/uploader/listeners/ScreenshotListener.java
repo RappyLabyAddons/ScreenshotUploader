@@ -1,7 +1,6 @@
 package com.rappytv.uploader.listeners;
 
 import com.rappytv.uploader.UploaderAddon;
-import com.rappytv.uploader.UploaderConfig;
 import com.rappytv.uploader.api.ApiRequest;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
@@ -12,7 +11,6 @@ import net.labymod.api.client.component.format.Style;
 import net.labymod.api.client.component.format.TextDecoration;
 import net.labymod.api.event.Subscribe;
 import net.labymod.api.event.client.misc.CaptureScreenshotEvent;
-import net.labymod.api.util.I18n;
 
 public class ScreenshotListener {
 
@@ -52,7 +50,7 @@ public class ScreenshotListener {
         }).exceptionally((e) -> {
             Laby.references().chatExecutor().displayClientMessage(
                 UploaderAddon.prefix.copy().append(Component.text(
-                    UploaderConfig.exceptions ? e.getMessage() : I18n.translate("uploader.upload.uploadError"),
+                    e.getMessage(),
                     NamedTextColor.RED
                 ))
             );

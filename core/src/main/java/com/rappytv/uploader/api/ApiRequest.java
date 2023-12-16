@@ -1,9 +1,7 @@
 package com.rappytv.uploader.api;
 
 import com.rappytv.uploader.UploaderAddon;
-import com.rappytv.uploader.UploaderConfig;
 import com.rappytv.uploader.api.uploaders.Uploader;
-import net.labymod.api.util.I18n;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -41,7 +39,7 @@ public class ApiRequest {
         try {
             String boundary = new BigInteger(128, new Random()).toString();
             HttpRequest request = HttpRequest.newBuilder()
-                .uri(new URI("https://media.rappytv.com" + uploader.getPath()))
+                .uri(new URI(uploader.getUri()))
                 .header("Content-Type", uploader.getMimeType(boundary))
                 .header("Authorization", uploader.getAuth() != null ? uploader.getAuth() : "")
                 .method(uploader.getMethod(), getBodyPublisher(boundary))
@@ -59,11 +57,11 @@ public class ApiRequest {
                 })
                 .exceptionally((e) -> {
                     future.completeExceptionally(e);
-                    error = UploaderConfig.exceptions ? e.getMessage() : I18n.translate("screenshotuploader.upload.error");
+                    error = e.getMessage();
                     return null;
                 });
         } catch (Exception e) {
-            error = UploaderConfig.exceptions ? e.getMessage() : I18n.translate("screenshotuploader.upload.error");
+            error = e.getMessage();
             future.completeExceptionally(e);
         }
 

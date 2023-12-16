@@ -17,13 +17,13 @@ public class ZiplineUploader extends Uploader {
     }
 
     @Override
-    public String getPath() {
-        return "/api/upload";
+    public String getUri() {
+        return addon.configuration().zipline().base() + "/api/upload";
     }
 
     @Override
     public String getAuth() {
-        return addon.configuration().ziplineKey();
+        return addon.configuration().zipline().auth();
     }
 
     @Override
