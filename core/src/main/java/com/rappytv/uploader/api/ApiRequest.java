@@ -40,7 +40,7 @@ public class ApiRequest {
             HttpRequest request = HttpRequest.newBuilder()
                 .uri(new URI(uploader.getUri()))
                 .header("Content-Type", uploader.getMimeType(boundary))
-                .header("Authorization", uploader.getAuth() != null ? uploader.getAuth() : "")
+                .header(uploader.getAuth()[0], uploader.getAuth()[1])
                 .method(uploader.getMethod(), getBodyPublisher(boundary))
                 .build();
 

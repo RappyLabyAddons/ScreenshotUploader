@@ -23,8 +23,8 @@ public class ZiplineUploader extends Uploader {
     }
 
     @Override
-    public String getAuth() {
-        return addon.configuration().zipline().auth();
+    public String[] getAuth() {
+        return new String[]{"Authorization", addon.configuration().zipline().auth()};
     }
 
     @Override
