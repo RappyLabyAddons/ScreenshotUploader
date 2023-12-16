@@ -1,4 +1,4 @@
-package com.rappytv.e;
+package com.rappytv.uploader;
 
 import net.labymod.api.addon.AddonConfig;
 import net.labymod.api.client.gui.screen.widget.widgets.input.SwitchWidget.SwitchSetting;

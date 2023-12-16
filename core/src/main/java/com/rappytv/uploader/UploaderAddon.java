@@ -1,6 +1,6 @@
-package com.rappytv.e;
+package com.rappytv.uploader;
 
-import com.rappytv.e.listeners.ScreenshotListener;
+import com.rappytv.uploader.listeners.ScreenshotListener;
 import net.labymod.api.addon.LabyAddon;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;

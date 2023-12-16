@@ -1,5 +1,5 @@
 {
-    "screenshotuploader": {
+    "uploader": {
         "settings": {
             "name": "Screenshot Uploader",
             "enabled": {
@@ -7,6 +7,9 @@
             },
             "javaExceptions": {
                 "name": "Java Exceptions"
+            },
+            "ziplineKey": {
+                "name": "Zipline Token"
             }
         },
         "upload": {

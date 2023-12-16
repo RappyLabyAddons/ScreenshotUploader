@@ -1,8 +1,8 @@
-package com.rappytv.e.listeners;
+package com.rappytv.uploader.listeners;
 
-import com.rappytv.e.UploaderAddon;
-import com.rappytv.e.UploaderConfig;
-import com.rappytv.e.api.ZiplineUploader;
+import com.rappytv.uploader.UploaderAddon;
+import com.rappytv.uploader.UploaderConfig;
+import com.rappytv.uploader.api.ZiplineUploader;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.event.ClickEvent;
@@ -28,15 +28,15 @@ public class ScreenshotListener {
         uploader.sendAsyncRequest().thenAccept((result) -> {
             if(uploader.isSuccessful()) {
                 Component copy = Component.translatable(
-                    "screenshotuploader.upload.copy",
+                    "uploader.upload.copy",
                     Style.builder()
                         .color(NamedTextColor.AQUA)
                         .decorate(TextDecoration.BOLD)
-                        .hoverEvent(HoverEvent.showText(Component.translatable("screenshotuploader.upload.hover").color(NamedTextColor.AQUA))).build()
+                        .hoverEvent(HoverEvent.showText(Component.translatable("uploader.upload.hover").color(NamedTextColor.AQUA))).build()
                         .clickEvent(ClickEvent.copyToClipboard(!uploader.getUploadLink().isBlank() ? uploader.getUploadLink() : ""))
                 );
                 Component component = Component.translatable(
-                    "screenshotuploader.upload.msg",
+                    "uploader.upload.msg",
                     !uploader.getUploadLink().isBlank() ? copy : Component.text("")
                 ).color(NamedTextColor.GRAY);
 
@@ -52,7 +52,7 @@ public class ScreenshotListener {
         }).exceptionally((e) -> {
             Laby.references().chatExecutor().displayClientMessage(
                 UploaderAddon.prefix.copy().append(Component.text(
-                    UploaderConfig.exceptions ? e.getMessage() : I18n.translate("screenshotuploader.upload.uploadError"),
+                    UploaderConfig.exceptions ? e.getMessage() : I18n.translate("uploader.upload.uploadError"),
                     NamedTextColor.RED
                 ))
             );

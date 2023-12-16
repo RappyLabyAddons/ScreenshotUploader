@@ -1,6 +1,6 @@
-package com.rappytv.e.api;
+package com.rappytv.uploader.api;
 
-import com.rappytv.e.UploaderConfig;
+import com.rappytv.uploader.UploaderConfig;
 import net.labymod.api.util.I18n;
 import java.io.ByteArrayOutputStream;
 import java.io.File;

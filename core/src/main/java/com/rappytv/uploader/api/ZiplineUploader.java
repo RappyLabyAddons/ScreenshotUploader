@@ -1,4 +1,4 @@
-package com.rappytv.e.api;
+package com.rappytv.uploader.api;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;

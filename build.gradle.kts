@@ -12,8 +12,8 @@ java.toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 labyMod {
     defaultPackageName = "com.rappytv.uploader" //change this to your main package name (used by all modules)
     addonInfo {
-        namespace = "screenshotuploader"
-        displayName = "CustomScreenshotUploader"
+        namespace = "uploader"
+        displayName = "Screenshot Uploader"
         author = "RappyTV"
         description = "Upload your minecraft screenshots to your custom destinations."
         minecraftVersion = "*"
