@@ -9,7 +9,7 @@ import java.net.http.HttpResponse;
 public class EShareUploader extends Uploader {
 
     public EShareUploader(UploaderAddon addon) {
-        super("ebio", addon);
+        super("eshare", addon);
     }
 
     @Override
