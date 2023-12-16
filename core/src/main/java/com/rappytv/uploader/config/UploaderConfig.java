@@ -21,7 +21,7 @@ public class UploaderConfig extends AddonConfig {
     private final ConfigProperty<Boolean> enabled = new ConfigProperty<>(true);
     @SpriteSlot(size = 32, x = 1)
     @DropdownSetting
-    private final ConfigProperty<Uploaders> uploader = new ConfigProperty<>(Uploaders.ZIPLINE);
+    private final ConfigProperty<Uploaders> uploader = new ConfigProperty<>(Uploaders.IMGUR);
     @SettingSection("uploaders")
     @SpriteSlot(size = 32, y = 1)
     private final EShareSubconfig eshare = new EShareSubconfig();
