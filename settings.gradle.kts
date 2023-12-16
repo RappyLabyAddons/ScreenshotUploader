@@ -1,4 +1,4 @@
-rootProject.name = "e"
+rootProject.name = "CustomScreenshotUploader"
 
 pluginManagement {
     val labyGradlePluginVersion = "0.3.40"

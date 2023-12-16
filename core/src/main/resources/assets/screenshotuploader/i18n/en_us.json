@@ -1,0 +1,18 @@
+{
+    "screenshotuploader": {
+        "settings": {
+            "name": "Custom Screenshot Uploader",
+            "enabled": {
+                "name": "Enabled"
+            },
+            "javaExceptions": {
+                "name": "Java Exceptions"
+            }
+        },
+        "copy": {
+            "msg": "Screenshot uploaded! Click [%s] to copy!",
+            "hover": "Click to copy upload url",
+            "copy": "COPY"
+        }
+    }
+}

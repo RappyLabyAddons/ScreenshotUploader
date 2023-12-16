@@ -10,13 +10,13 @@ version = "1.0.0"
 java.toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 
 labyMod {
-    defaultPackageName = "com.rappytv.e" //change this to your main package name (used by all modules)
+    defaultPackageName = "com.rappytv.uploader" //change this to your main package name (used by all modules)
     addonInfo {
-        namespace = "e"
-        displayName = "e addon"
+        namespace = "screenshotuploader"
+        displayName = "CustomScreenshotUploader"
         author = "RappyTV"
-        description = "e"
-        minecraftVersion = "1.8<1.20.4"
+        description = "Upload your minecraft screenshots to your custom destinations."
+        minecraftVersion = "*"
         version = System.getenv().getOrDefault("VERSION", "1.0.0")
     }
 
