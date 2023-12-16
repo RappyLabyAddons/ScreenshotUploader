@@ -10,7 +10,7 @@ import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.client.component.format.Style;
 import net.labymod.api.client.component.format.TextDecoration;
 import net.labymod.api.event.Subscribe;
-import net.labymod.api.event.client.misc.CaptureScreenshotEvent;
+import net.labymod.api.event.client.misc.WriteScreenshotEvent;
 
 public class ScreenshotListener {
 
@@ -21,7 +21,7 @@ public class ScreenshotListener {
     }
 
     @Subscribe
-    public void onScreenshot(CaptureScreenshotEvent event) {
+    public void onScreenshot(WriteScreenshotEvent event) {
         ApiRequest uploader = new ApiRequest(addon, event.getDestination());
         uploader.sendAsyncRequest().thenAccept((result) -> {
             if(uploader.isSuccessful()) {

@@ -29,7 +29,7 @@ public class ApiRequest {
 
     public ApiRequest(UploaderAddon addon, File file) {
         this.uploader = addon.configuration().uploader();
-        this.file = new File("D:\\windirs\\Dokumente\\@Minecraft\\Coding\\Labymod 4 Addons\\e\\run\\client\\screenshots\\2023-12-16_03.39.13.png");
+        this.file = file;
     }
 
     public CompletableFuture<Void> sendAsyncRequest() {
