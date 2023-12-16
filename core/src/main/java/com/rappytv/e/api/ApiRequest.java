@@ -1,6 +1,5 @@
 package com.rappytv.e.api;
 
-import com.google.gson.Gson;
 import com.rappytv.e.UploaderConfig;
 import net.labymod.api.util.I18n;
 import java.io.ByteArrayOutputStream;
@@ -25,7 +24,7 @@ public abstract class ApiRequest {
     private final Charset charset = StandardCharsets.UTF_8;
     private boolean successful;
     private String uploadLink;
-    private String error;
+    protected String error;
 
     private final String key;
     private final File file;
@@ -51,17 +50,18 @@ public abstract class ApiRequest {
             client
                 .sendAsync(request, BodyHandlers.ofString())
                 .thenAccept((response) -> {
-                    successful = response.statusCode() >= 200 && response.statusCode() <= 299;
+                    int status = getStatus(response);
+                    successful = status >= 200 && status <= 299;
                     uploadLink = resolveUrl(response);
                     future.complete(null);
                 })
                 .exceptionally((e) -> {
                     future.completeExceptionally(e);
-                    error = UploaderConfig.exceptions ? e.getMessage() : I18n.translate("screenshotuploader.messages.uploadError");
+                    error = UploaderConfig.exceptions ? e.getMessage() : I18n.translate("screenshotuploader.upload.uploadError");
                     return null;
                 });
         } catch (Exception e) {
-            error = UploaderConfig.exceptions ? e.getMessage() : I18n.translate("screenshotuploader.messages.uploadError");
+            error = UploaderConfig.exceptions ? e.getMessage() : I18n.translate("screenshotuploader.upload.uploadError");
             future.completeExceptionally(e);
         }
 
@@ -96,6 +96,7 @@ public abstract class ApiRequest {
     }
     public abstract String getMethod();
     public abstract String getPath();
+    public abstract int getStatus(HttpResponse<String> response);
     public abstract String resolveUrl(HttpResponse<String> response);
     public String getMimeType(String boundary) {
         return "multipart/form-data; boundary=" + boundary;

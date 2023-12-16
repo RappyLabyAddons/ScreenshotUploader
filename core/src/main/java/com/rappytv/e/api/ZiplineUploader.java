@@ -22,14 +22,31 @@ public class ZiplineUploader extends ApiRequest {
     }
 
     @Override
-    public String resolveUrl(HttpResponse<String> response) {
+    public int getStatus(HttpResponse<String> response) {
+        System.out.println(response.body());
         try {
             JsonObject object = JsonParser.parseString(response.body()).getAsJsonObject();
 
-            return object.getAsJsonArray("files").get(0).getAsString();
+            if(object.has("error")) error = object.get("error").getAsString();
+            return object.has("code") ? object.get("code").getAsInt() : response.statusCode();
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            return response.statusCode();
+        }
+    }
+
+    @Override
+    public String resolveUrl(HttpResponse<String> response) {
+        System.out.println(response.body());
+        try {
+            JsonObject object = JsonParser.parseString(response.body()).getAsJsonObject();
+
+            return object.has("files")
+                ? object.getAsJsonArray("files").get(0).getAsString()
+                : "";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
         }
     }
 }

@@ -1,7 +1,7 @@
 {
     "screenshotuploader": {
         "settings": {
-            "name": "Custom Screenshot Uploader",
+            "name": "Screenshot Uploader",
             "enabled": {
                 "name": "Enabled"
             },
@@ -9,10 +9,11 @@
                 "name": "Java Exceptions"
             }
         },
-        "copy": {
-            "msg": "Screenshot uploaded! Click [%s] to copy!",
-            "hover": "Click to copy upload url",
-            "copy": "COPY"
+        "upload": {
+            "msg": "Screenshot uploaded! %s",
+            "hover": "Clickable",
+            "copy": "[COPY URL]",
+            "error": "An exception was thrown!"
         }
     }
 }
