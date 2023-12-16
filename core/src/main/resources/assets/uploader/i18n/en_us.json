@@ -39,7 +39,8 @@
         "upload": {
             "msg": "Screenshot uploaded! %s",
             "hover": "Clickable",
-            "copy": "[COPY URL]"
+            "copy": "[COPY URL]",
+            "ziplineError": "An unknown error ocurred! Please check your Zipline configuration!"
         },
         "toast": {
             "error": "An error ocurred!",

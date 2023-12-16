@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.rappytv.uploader.UploaderAddon;
 import com.rappytv.uploader.api.Uploader;
+import net.labymod.api.util.I18n;
 import java.net.http.HttpResponse;
 
 public class ZiplineUploader extends Uploader {
@@ -44,10 +45,10 @@ public class ZiplineUploader extends Uploader {
         try {
             JsonObject object = JsonParser.parseString(response.body()).getAsJsonObject();
 
-            return object.has("error") ? object.get("error").getAsString() : "";
+            return object.has("error") ? object.get("error").getAsString() : I18n.translate("uploader.upload.ziplineError");
         } catch (Exception e) {
             e.printStackTrace();
-            return "";
+            return I18n.translate("uploader.upload.ziplineError");
         }
     }
 
