@@ -1,5 +1,6 @@
 package com.rappytv.uploader;
 
+import com.rappytv.uploader.api.uploaders.ZiplineUploader;
 import com.rappytv.uploader.listeners.ScreenshotListener;
 import net.labymod.api.addon.LabyAddon;
 import net.labymod.api.client.component.Component;
@@ -19,10 +20,16 @@ public class UploaderAddon extends LabyAddon<UploaderConfig> {
     protected void enable() {
         registerSettingCategory();
         registerListener(new ScreenshotListener(this));
+
+        loadUploaders();
     }
 
     @Override
     protected Class<? extends UploaderConfig> configurationClass() {
         return UploaderConfig.class;
+    }
+
+    private void loadUploaders() {
+        new ZiplineUploader(this);
     }
 }

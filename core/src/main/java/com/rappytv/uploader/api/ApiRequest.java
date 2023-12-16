@@ -1,6 +1,8 @@
 package com.rappytv.uploader.api;
 
+import com.rappytv.uploader.UploaderAddon;
 import com.rappytv.uploader.UploaderConfig;
+import com.rappytv.uploader.api.uploaders.Uploader;
 import net.labymod.api.util.I18n;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -11,7 +13,6 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpRequest.BodyPublisher;
 import java.net.http.HttpRequest.BodyPublishers;
-import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -19,19 +20,19 @@ import java.nio.file.Files;
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 
-public abstract class ApiRequest {
+public class ApiRequest {
 
     private final Charset charset = StandardCharsets.UTF_8;
     private boolean successful;
     private String uploadLink;
     protected String error;
 
-    private final String key;
+    private final Uploader uploader;
     private final File file;
 
-    public ApiRequest(String key, File file) {
-        this.key = key;
-        this.file = new File("D:\\windirs\\Dokumente\\@Minecraft\\Coding\\Labymod 4 Addons\\e\\run\\client\\screenshots\\2023-12-16_00.11.04.png");
+    public ApiRequest(UploaderAddon addon, File file) {
+        this.uploader = addon.configuration().uploader();
+        this.file = new File("D:\\windirs\\Dokumente\\@Minecraft\\Coding\\Labymod 4 Addons\\e\\run\\client\\screenshots\\2023-12-16_03.39.13.png");
     }
 
     public CompletableFuture<Void> sendAsyncRequest() {
@@ -40,28 +41,29 @@ public abstract class ApiRequest {
         try {
             String boundary = new BigInteger(128, new Random()).toString();
             HttpRequest request = HttpRequest.newBuilder()
-                .uri(new URI("https://media.rappytv.com" + getPath()))
-                .header("Content-Type", getMimeType(boundary))
-                .header("Authorization", key != null ? key : "")
-                .method(getMethod(), getBodyPublisher(boundary))
+                .uri(new URI("https://media.rappytv.com" + uploader.getPath()))
+                .header("Content-Type", uploader.getMimeType(boundary))
+                .header("Authorization", uploader.getAuth() != null ? uploader.getAuth() : "")
+                .method(uploader.getMethod(), getBodyPublisher(boundary))
                 .build();
 
             HttpClient client = HttpClient.newHttpClient();
             client
                 .sendAsync(request, BodyHandlers.ofString())
                 .thenAccept((response) -> {
-                    int status = getStatus(response);
+                    int status = uploader.getStatus(response);
                     successful = status >= 200 && status <= 299;
-                    uploadLink = resolveUrl(response);
+                    uploadLink = uploader.resolveUrl(response);
+                    if(!successful) error = uploader.getError(response);
                     future.complete(null);
                 })
                 .exceptionally((e) -> {
                     future.completeExceptionally(e);
-                    error = UploaderConfig.exceptions ? e.getMessage() : I18n.translate("screenshotuploader.upload.uploadError");
+                    error = UploaderConfig.exceptions ? e.getMessage() : I18n.translate("screenshotuploader.upload.error");
                     return null;
                 });
         } catch (Exception e) {
-            error = UploaderConfig.exceptions ? e.getMessage() : I18n.translate("screenshotuploader.upload.uploadError");
+            error = UploaderConfig.exceptions ? e.getMessage() : I18n.translate("screenshotuploader.upload.error");
             future.completeExceptionally(e);
         }
 
@@ -93,12 +95,5 @@ public abstract class ApiRequest {
         byteArrayOutputStream.write(("--" + boundary + "--").getBytes(charset));
 
         return BodyPublishers.ofByteArray(byteArrayOutputStream.toByteArray());
-    }
-    public abstract String getMethod();
-    public abstract String getPath();
-    public abstract int getStatus(HttpResponse<String> response);
-    public abstract String resolveUrl(HttpResponse<String> response);
-    public String getMimeType(String boundary) {
-        return "multipart/form-data; boundary=" + boundary;
     }
 }

@@ -1,14 +1,14 @@
-package com.rappytv.uploader.api;
+package com.rappytv.uploader.api.uploaders;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import java.io.File;
+import com.rappytv.uploader.UploaderAddon;
 import java.net.http.HttpResponse;
 
-public class ZiplineUploader extends ApiRequest {
+public class ZiplineUploader extends Uploader {
 
-    public ZiplineUploader(String key, File file) {
-        super(key, file);
+    public ZiplineUploader(UploaderAddon addon) {
+        super("zipline", addon);
     }
 
     @Override
@@ -22,12 +22,15 @@ public class ZiplineUploader extends ApiRequest {
     }
 
     @Override
+    public String getAuth() {
+        return addon.configuration().ziplineKey();
+    }
+
+    @Override
     public int getStatus(HttpResponse<String> response) {
-        System.out.println(response.body());
         try {
             JsonObject object = JsonParser.parseString(response.body()).getAsJsonObject();
 
-            if(object.has("error")) error = object.get("error").getAsString();
             return object.has("code") ? object.get("code").getAsInt() : response.statusCode();
         } catch (Exception e) {
             e.printStackTrace();
@@ -36,8 +39,19 @@ public class ZiplineUploader extends ApiRequest {
     }
 
     @Override
+    public String getError(HttpResponse<String> response) {
+        try {
+            JsonObject object = JsonParser.parseString(response.body()).getAsJsonObject();
+
+            return object.has("error") ? object.get("error").getAsString() : "";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    @Override
     public String resolveUrl(HttpResponse<String> response) {
-        System.out.println(response.body());
         try {
             JsonObject object = JsonParser.parseString(response.body()).getAsJsonObject();
 

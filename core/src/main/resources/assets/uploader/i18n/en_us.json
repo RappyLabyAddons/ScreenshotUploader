@@ -5,6 +5,13 @@
             "enabled": {
                 "name": "Enabled"
             },
+            "uploader": {
+                "name": "Uploader",
+                "entries": {
+                    "zipline": "Zipline"
+                }
+
+            },
             "javaExceptions": {
                 "name": "Java Exceptions"
             },

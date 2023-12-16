@@ -2,7 +2,7 @@ package com.rappytv.uploader.listeners;
 
 import com.rappytv.uploader.UploaderAddon;
 import com.rappytv.uploader.UploaderConfig;
-import com.rappytv.uploader.api.ZiplineUploader;
+import com.rappytv.uploader.api.ApiRequest;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.event.ClickEvent;
@@ -24,7 +24,7 @@ public class ScreenshotListener {
 
     @Subscribe
     public void onScreenshot(CaptureScreenshotEvent event) {
-        ZiplineUploader uploader = new ZiplineUploader(addon.configuration().ziplineKey(), event.getDestination());
+        ApiRequest uploader = new ApiRequest(addon, event.getDestination());
         uploader.sendAsyncRequest().thenAccept((result) -> {
             if(uploader.isSuccessful()) {
                 Component copy = Component.translatable(
