@@ -2,13 +2,26 @@
     "uploader": {
         "settings": {
             "name": "Screenshot Uploader",
+            "header": {
+                "uploaders": {
+                    "name": "Uploader Settings"
+                }
+            },
             "enabled": {
                 "name": "Enabled"
             },
             "uploader": {
                 "name": "Uploader",
                 "entries": {
-                    "zipline": "Zipline"
+                    "zipline": "Zipline",
+                    "eshare": "e.share"
+                }
+            },
+            "eshare": {
+                "name": "e.share Options",
+                "auth": {
+                    "name": "API Key",
+                    "description": "You can find your API Key at §bhttps://share.ebio.gg/dashboard"
                 }
             },
             "zipline": {
@@ -18,7 +31,8 @@
                     "description": "Scheme: §bhttp(s)://<base>\n§fExample: §bhttps://media.rappytv.com"
                 },
                 "auth": {
-                    "name": "Zipline Token"
+                    "name": "Zipline Token",
+                    "description": "You can find this Token in your user settings"
                 }
             }
         },
