@@ -1,25 +1,15 @@
 package com.rappytv.uploader.api;
 
 import com.rappytv.uploader.UploaderAddon;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
-import java.math.BigInteger;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
-import java.net.http.HttpRequest.BodyPublisher;
-import java.net.http.HttpRequest.BodyPublishers;
 import java.net.http.HttpResponse.BodyHandlers;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 
 public class ApiRequest {
 
-    private final Charset charset = StandardCharsets.UTF_8;
     private boolean successful;
     private String uploadLink;
     protected String error;
@@ -36,12 +26,12 @@ public class ApiRequest {
         CompletableFuture<Void> future = new CompletableFuture<>();
 
         try {
-            String boundary = new BigInteger(128, new Random()).toString();
+            MultipartData data = uploader.getMultipartData(file);
             HttpRequest request = HttpRequest.newBuilder()
                 .uri(new URI(uploader.getUri()))
-                .header("Content-Type", uploader.getMimeType(boundary))
+                .header("Content-Type", data.getContentType())
                 .header(uploader.getAuth()[0], uploader.getAuth()[1])
-                .method(uploader.getMethod(), getBodyPublisher(boundary))
+                .method(uploader.getMethod(), data.getBodyPublisher())
                 .build();
 
             HttpClient client = HttpClient.newHttpClient();
@@ -75,22 +65,5 @@ public class ApiRequest {
     }
     public String getError() {
         return error;
-    }
-    private BodyPublisher getBodyPublisher(String boundary) throws IOException {
-        byte[] newline = "\r\n".getBytes(charset);
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-
-        byteArrayOutputStream.write(("--" + boundary).getBytes(charset));
-        byteArrayOutputStream.write(newline);
-        byteArrayOutputStream.write(("Content-Disposition: form-data; name=\"file\"; filename=\"" + file.getName() + "\"").getBytes(charset));
-        byteArrayOutputStream.write(newline);
-        byteArrayOutputStream.write(("Content-Type: image/png").getBytes(charset));
-        byteArrayOutputStream.write(newline);
-        byteArrayOutputStream.write(newline);
-        byteArrayOutputStream.write(Files.readAllBytes(file.toPath()));
-        byteArrayOutputStream.write(newline);
-        byteArrayOutputStream.write(("--" + boundary + "--").getBytes(charset));
-
-        return BodyPublishers.ofByteArray(byteArrayOutputStream.toByteArray());
     }
 }
