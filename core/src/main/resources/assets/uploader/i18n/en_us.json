@@ -13,8 +13,9 @@
             "uploader": {
                 "name": "Uploader",
                 "entries": {
-                    "zipline": "Zipline",
-                    "eshare": "e.share"
+                    "eshare": "e.share",
+                    "xbackbone": "XBackBone",
+                    "zipline": "Zipline"
                 }
             },
             "eshare": {
@@ -22,6 +23,17 @@
                 "auth": {
                     "name": "API Key",
                     "description": "You can find your API Key at §bhttps://share.ebio.gg/dashboard"
+                }
+            },
+            "xbackbone": {
+                "name": "XBackBone Options",
+                "base": {
+                    "name": "Base URL",
+                    "description": "Scheme: §bhttp(s)://<base>\n§fExample: §bhttps://media.rappytv.com"
+                },
+                "auth": {
+                    "name": "XBackBone Token",
+                    "description": "You can find this token in your user profile"
                 }
             },
             "zipline": {

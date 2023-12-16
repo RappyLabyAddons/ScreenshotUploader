@@ -3,6 +3,7 @@ package com.rappytv.uploader.config;
 import com.rappytv.uploader.api.Uploader;
 import com.rappytv.uploader.api.Uploaders;
 import com.rappytv.uploader.config.subconfig.EShareSubconfig;
+import com.rappytv.uploader.config.subconfig.XBackBoneSubconfig;
 import com.rappytv.uploader.config.subconfig.ZiplineSubconfig;
 import net.labymod.api.addon.AddonConfig;
 import net.labymod.api.client.gui.screen.widget.widgets.input.SwitchWidget.SwitchSetting;
@@ -25,6 +26,8 @@ public class UploaderConfig extends AddonConfig {
     @SpriteSlot(size = 32, y = 1)
     private final EShareSubconfig eshare = new EShareSubconfig();
     @SpriteSlot(size = 32, y = 1, x = 1)
+    private final XBackBoneSubconfig xbackbone = new XBackBoneSubconfig();
+    @SpriteSlot(size = 32, y = 1, x = 2)
     private final ZiplineSubconfig zipline = new ZiplineSubconfig();
 
     @Override
@@ -36,6 +39,9 @@ public class UploaderConfig extends AddonConfig {
     }
     public EShareSubconfig eshare() {
         return eshare;
+    }
+    public XBackBoneSubconfig xbackbone() {
+        return xbackbone;
     }
     public ZiplineSubconfig zipline() {
         return zipline;
