@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.rappytv.uploader.UploaderAddon;
 import com.rappytv.uploader.api.Uploader;
+import net.labymod.api.util.I18n;
 import java.net.http.HttpResponse;
 
 public class EShareUploader extends Uploader {
@@ -37,10 +38,12 @@ public class EShareUploader extends Uploader {
         try {
             JsonObject object = JsonParser.parseString(response.body()).getAsJsonObject();
 
-            return object.has("message") ? object.get("message").getAsString() : "";
+            return object.has("message")
+                ? object.get("message").getAsString()
+                : I18n.translate("uploader.upload.emptyError");
         } catch (Exception e) {
             e.printStackTrace();
-            return "";
+            return I18n.translate("uploader.upload.emptyError");
         }
     }
 

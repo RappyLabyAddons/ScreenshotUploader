@@ -52,6 +52,8 @@
             "msg": "Screenshot uploaded! %s",
             "hover": "Clickable",
             "copy": "[COPY URL]",
+            "emptyError": "Empty error!",
+            "xError": "An unknown error ocurred! Please check your XBackBone configuration!",
             "ziplineError": "An unknown error ocurred! Please check your Zipline configuration!"
         },
         "toast": {
