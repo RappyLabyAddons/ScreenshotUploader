@@ -10,7 +10,7 @@ public class UploaderAddon extends LabyAddon<UploaderConfig> {
     @Override
     protected void enable() {
         registerSettingCategory();
-        registerListener(new ScreenshotListener());
+        registerListener(new ScreenshotListener(this));
     }
 
     @Override

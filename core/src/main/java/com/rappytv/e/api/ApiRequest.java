@@ -22,7 +22,6 @@ import java.util.concurrent.CompletableFuture;
 
 public abstract class ApiRequest {
 
-    protected final Gson gson = new Gson();
     private final Charset charset = StandardCharsets.UTF_8;
     private boolean successful;
     private String uploadLink;
