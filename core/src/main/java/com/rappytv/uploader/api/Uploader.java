@@ -1,4 +1,4 @@
-package com.rappytv.uploader.api.uploaders;
+package com.rappytv.uploader.api;
 
 import com.rappytv.uploader.UploaderAddon;
 import java.net.http.HttpResponse;

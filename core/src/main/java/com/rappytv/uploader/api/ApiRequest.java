@@ -1,7 +1,6 @@
 package com.rappytv.uploader.api;
 
 import com.rappytv.uploader.UploaderAddon;
-import com.rappytv.uploader.api.uploaders.Uploader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;

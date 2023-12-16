@@ -3,6 +3,7 @@ package com.rappytv.uploader.api.uploaders;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.rappytv.uploader.UploaderAddon;
+import com.rappytv.uploader.api.Uploader;
 import java.net.http.HttpResponse;
 
 public class ZiplineUploader extends Uploader {

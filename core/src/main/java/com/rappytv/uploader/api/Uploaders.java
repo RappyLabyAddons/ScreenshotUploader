@@ -1,4 +1,4 @@
-package com.rappytv.uploader.api.uploaders;
+package com.rappytv.uploader.api;
 
 public enum Uploaders {
     ZIPLINE;
