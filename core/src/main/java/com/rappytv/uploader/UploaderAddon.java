@@ -1,6 +1,7 @@
 package com.rappytv.uploader;
 
 import com.rappytv.uploader.api.uploaders.EShareUploader;
+import com.rappytv.uploader.api.uploaders.ImgurUploader;
 import com.rappytv.uploader.api.uploaders.XBackBoneUploader;
 import com.rappytv.uploader.api.uploaders.ZiplineUploader;
 import com.rappytv.uploader.config.UploaderConfig;
@@ -34,6 +35,7 @@ public class UploaderAddon extends LabyAddon<UploaderConfig> {
 
     private void loadUploaders() {
         new EShareUploader(this);
+        new ImgurUploader(this);
         new XBackBoneUploader(this);
         new ZiplineUploader(this);
     }

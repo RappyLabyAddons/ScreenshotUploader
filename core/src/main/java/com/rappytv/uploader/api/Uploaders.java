@@ -2,6 +2,7 @@ package com.rappytv.uploader.api;
 
 public enum Uploaders {
     ESHARE,
+    IMGUR,
     XBACKBONE,
     ZIPLINE;
 
