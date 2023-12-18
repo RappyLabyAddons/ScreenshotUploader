@@ -4,8 +4,9 @@ import com.rappytv.uploader.api.uploaders.EShareUploader;
 import com.rappytv.uploader.api.uploaders.ImgurUploader;
 import com.rappytv.uploader.api.uploaders.XBackBoneUploader;
 import com.rappytv.uploader.api.uploaders.ZiplineUploader;
+import com.rappytv.uploader.command.UploadCommand;
 import com.rappytv.uploader.config.UploaderConfig;
-import com.rappytv.uploader.listeners.ScreenshotListener;
+import com.rappytv.uploader.listener.ScreenshotListener;
 import net.labymod.api.addon.LabyAddon;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
@@ -23,7 +24,8 @@ public class UploaderAddon extends LabyAddon<UploaderConfig> {
     @Override
     protected void enable() {
         registerSettingCategory();
-        registerListener(new ScreenshotListener(this));
+        registerCommand(new UploadCommand(this));
+        registerListener(new ScreenshotListener());
 
         loadUploaders();
     }

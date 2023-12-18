@@ -1,6 +1,5 @@
 package com.rappytv.uploader.api;
 
-import com.rappytv.uploader.UploaderAddon;
 import java.io.File;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -17,8 +16,8 @@ public class ApiRequest {
     private final Uploader uploader;
     private final File file;
 
-    public ApiRequest(UploaderAddon addon, File file) {
-        this.uploader = addon.configuration().uploader();
+    public ApiRequest(Uploader uploader, File file) {
+        this.uploader = uploader;
         this.file = file;
     }
 
