@@ -50,7 +50,11 @@
             }
         },
         "upload": {
-            "msg": "Screenshot uploaded! %s",
+            "noToken": "Please provide the API Key for your uploader in the addon config.",
+            "file": "File not found!",
+            "upload": "Click here to upload the screenshot!",
+            "uploading": "Uploading screenshot...",
+            "uploaded": "Screenshot uploaded! %s",
             "hover": "Clickable",
             "copy": "[COPY URL]",
             "emptyError": "Empty error!",
