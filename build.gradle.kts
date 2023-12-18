@@ -17,7 +17,7 @@ labyMod {
         author = "RappyTV"
         description = "Upload your minecraft screenshots to your custom destinations."
         minecraftVersion = "*"
-        version = System.getenv().getOrDefault("VERSION", "1.0.0")
+        version = System.getenv().getOrDefault("VERSION", "1.0.1")
     }
 
     minecraft {
