@@ -19,7 +19,7 @@ public class ImgurUploader extends Uploader {
 
     @Override
     public Icon getIcon() {
-        return Icon.sprite32(icons, 1, 0);
+        return Icon.sprite32(icons, 1, 1);
     }
 
     @Override

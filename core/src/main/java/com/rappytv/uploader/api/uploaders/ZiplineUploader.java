@@ -16,7 +16,7 @@ public class ZiplineUploader extends Uploader {
 
     @Override
     public Icon getIcon() {
-        return Icon.sprite32(icons, 2, 1);
+        return Icon.sprite32(icons, 3, 1);
     }
 
     @Override

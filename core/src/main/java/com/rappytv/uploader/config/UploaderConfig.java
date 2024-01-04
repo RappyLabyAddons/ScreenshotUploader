@@ -25,9 +25,9 @@ public class UploaderConfig extends AddonConfig {
     @SettingSection("uploaders")
     @SpriteSlot(size = 32, y = 1)
     private final EShareSubconfig eshare = new EShareSubconfig();
-    @SpriteSlot(size = 32, y = 1, x = 1)
-    private final XBackBoneSubconfig xbackbone = new XBackBoneSubconfig();
     @SpriteSlot(size = 32, y = 1, x = 2)
+    private final XBackBoneSubconfig xbackbone = new XBackBoneSubconfig();
+    @SpriteSlot(size = 32, y = 1, x = 3)
     private final ZiplineSubconfig zipline = new ZiplineSubconfig();
 
     @Override
