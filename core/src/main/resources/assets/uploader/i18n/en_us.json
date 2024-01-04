@@ -10,6 +10,9 @@
             "enabled": {
                 "name": "Enabled"
             },
+            "askBeforeDoubleUploads": {
+                "name": "Ask before double uploads"
+            },
             "uploader": {
                 "name": "Uploader",
                 "entries": {
@@ -52,6 +55,8 @@
         "upload": {
             "noToken": "Please provide the API Key for your uploader in the addon config.",
             "file": "File not found!",
+            "already": "You've already opened the menu for this screenshot! %s",
+            "openAnyway": "Want to open it anyway?",
             "upload": "Click here to upload the screenshot!",
             "hover": "Clickable",
             "emptyError": "Empty error!",

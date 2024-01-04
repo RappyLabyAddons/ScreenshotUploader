@@ -19,6 +19,8 @@ public class UploaderConfig extends AddonConfig {
     @SpriteSlot(size = 32)
     @SwitchSetting
     private final ConfigProperty<Boolean> enabled = new ConfigProperty<>(true);
+    @SwitchSetting
+    private final ConfigProperty<Boolean> askBeforeDoubleUploads = new ConfigProperty<>(true);
     @SpriteSlot(size = 32, x = 1)
     @DropdownSetting
     private final ConfigProperty<Uploaders> uploader = new ConfigProperty<>(Uploaders.IMGUR);
@@ -33,6 +35,9 @@ public class UploaderConfig extends AddonConfig {
     @Override
     public ConfigProperty<Boolean> enabled() {
         return enabled;
+    }
+    public boolean askBeforeDoubleUploads() {
+        return askBeforeDoubleUploads.get();
     }
     public Uploader uploader() {
         return uploader.get().getUploader();
