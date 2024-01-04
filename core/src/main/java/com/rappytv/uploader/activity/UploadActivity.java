@@ -47,9 +47,11 @@ public class UploadActivity extends SimpleActivity {
             HorizontalListWidget uploaderWidget = new HorizontalListWidget().addId("uploader");
             IconWidget icon = new IconWidget(uploader.getIcon()).addId("icon");
             ComponentWidget name = ComponentWidget.text(uploader.getName()).addId("name");
-            ButtonWidget button = new ButtonWidget()
-                .updateComponent(Component.translatable("uploader.activity.button"))
-                .addId("button");
+            ButtonWidget button = new ButtonWidget().addId("button");
+            if(uploader.getAuth()[1].isBlank()) {
+                button.setEnabled(false);
+                button.updateComponent(Component.translatable("uploader.activity.noAuth", NamedTextColor.RED));
+            } else button.updateComponent(Component.translatable("uploader.activity.button"));
 
             button.setActionListener(() -> {
                 button.setEnabled(false);

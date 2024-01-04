@@ -65,6 +65,7 @@
         },
         "activity": {
             "title": "Upload Screenshot",
+            "noAuth": "No Auth",
             "button": "Upload",
             "uploading": "Uploading",
             "copy": "Copy",
