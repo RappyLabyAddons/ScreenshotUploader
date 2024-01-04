@@ -20,11 +20,6 @@ public class ZiplineUploader extends Uploader {
     }
 
     @Override
-    public String getMethod() {
-        return "POST";
-    }
-
-    @Override
     public String getUri() {
         return addon.configuration().zipline().base() + "/api/upload";
     }

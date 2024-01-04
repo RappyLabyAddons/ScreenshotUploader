@@ -35,7 +35,6 @@ public abstract class Uploader {
     }
 
     public abstract Icon getIcon();
-    public abstract String getMethod();
     public abstract String getUri();
     public abstract String[] getAuth();
     public abstract String getError(HttpResponse<String> response);

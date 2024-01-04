@@ -23,11 +23,6 @@ public class XBackBoneUploader extends Uploader {
     }
 
     @Override
-    public String getMethod() {
-        return "POST";
-    }
-
-    @Override
     public String getUri() {
         return addon.configuration().xbackbone().base() + "/upload";
     }

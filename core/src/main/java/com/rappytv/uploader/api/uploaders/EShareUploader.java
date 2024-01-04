@@ -20,11 +20,6 @@ public class EShareUploader extends Uploader {
     }
 
     @Override
-    public String getMethod() {
-        return "POST";
-    }
-
-    @Override
     public String getUri() {
         return "https://api.ebio.gg/api/share/upload";
     }
