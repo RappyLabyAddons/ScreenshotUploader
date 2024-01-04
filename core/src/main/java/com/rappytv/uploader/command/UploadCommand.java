@@ -2,7 +2,6 @@ package com.rappytv.uploader.command;
 
 import com.rappytv.uploader.UploaderAddon;
 import com.rappytv.uploader.activity.UploadActivity;
-import com.rappytv.uploader.api.Uploader;
 import net.labymod.api.Laby;
 import net.labymod.api.client.chat.command.Command;
 import net.labymod.api.client.component.Component;
@@ -27,11 +26,6 @@ public class UploadCommand extends Command {
 
     @Override
     public boolean execute(String prefix, String[] args) {
-        Uploader uploader = addon.configuration().uploader();
-        if(uploader.getAuth()[1].isBlank()) {
-            displayMessage(UploaderAddon.prefix.copy().append(Component.translatable("uploader.upload.noToken", NamedTextColor.RED)));
-            return true;
-        }
         if(args.length < 1) {
             displayMessage(UploaderAddon.prefix.copy().append(Component.translatable("uploader.upload.file", NamedTextColor.RED)));
             return true;

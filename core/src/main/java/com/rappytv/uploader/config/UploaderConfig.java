@@ -1,13 +1,10 @@
 package com.rappytv.uploader.config;
 
-import com.rappytv.uploader.api.Uploader;
-import com.rappytv.uploader.api.Uploaders;
 import com.rappytv.uploader.config.subconfig.EShareSubconfig;
 import com.rappytv.uploader.config.subconfig.XBackBoneSubconfig;
 import com.rappytv.uploader.config.subconfig.ZiplineSubconfig;
 import net.labymod.api.addon.AddonConfig;
 import net.labymod.api.client.gui.screen.widget.widgets.input.SwitchWidget.SwitchSetting;
-import net.labymod.api.client.gui.screen.widget.widgets.input.dropdown.DropdownWidget.DropdownSetting;
 import net.labymod.api.configuration.loader.annotation.SpriteSlot;
 import net.labymod.api.configuration.loader.annotation.SpriteTexture;
 import net.labymod.api.configuration.loader.property.ConfigProperty;
@@ -19,11 +16,9 @@ public class UploaderConfig extends AddonConfig {
     @SpriteSlot(size = 32)
     @SwitchSetting
     private final ConfigProperty<Boolean> enabled = new ConfigProperty<>(true);
+    @SpriteSlot(size = 32, x = 1)
     @SwitchSetting
     private final ConfigProperty<Boolean> askBeforeDoubleUploads = new ConfigProperty<>(true);
-    @SpriteSlot(size = 32, x = 1)
-    @DropdownSetting
-    private final ConfigProperty<Uploaders> uploader = new ConfigProperty<>(Uploaders.IMGUR);
     @SettingSection("uploaders")
     @SpriteSlot(size = 32, y = 1)
     private final EShareSubconfig eshare = new EShareSubconfig();
@@ -38,9 +33,6 @@ public class UploaderConfig extends AddonConfig {
     }
     public boolean askBeforeDoubleUploads() {
         return askBeforeDoubleUploads.get();
-    }
-    public Uploader uploader() {
-        return uploader.get().getUploader();
     }
     public EShareSubconfig eshare() {
         return eshare;
