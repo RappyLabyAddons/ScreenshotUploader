@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.rappytv.uploader.UploaderAddon;
 import com.rappytv.uploader.api.Uploader;
+import net.labymod.api.client.gui.icon.Icon;
 import net.labymod.api.util.I18n;
 import java.net.http.HttpResponse;
 
@@ -11,6 +12,11 @@ public class EShareUploader extends Uploader {
 
     public EShareUploader(UploaderAddon addon) {
         super("eshare", addon);
+    }
+
+    @Override
+    public Icon getIcon() {
+        return Icon.sprite32(icons, 0, 1);
     }
 
     @Override

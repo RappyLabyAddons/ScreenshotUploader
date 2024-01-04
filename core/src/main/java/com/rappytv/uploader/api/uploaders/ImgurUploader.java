@@ -5,6 +5,7 @@ import com.google.gson.JsonParser;
 import com.rappytv.uploader.UploaderAddon;
 import com.rappytv.uploader.api.MultipartData;
 import com.rappytv.uploader.api.Uploader;
+import net.labymod.api.client.gui.icon.Icon;
 import net.labymod.api.util.I18n;
 import java.io.File;
 import java.io.IOException;
@@ -14,6 +15,11 @@ public class ImgurUploader extends Uploader {
 
     public ImgurUploader(UploaderAddon addon) {
         super("imgur", addon);
+    }
+
+    @Override
+    public Icon getIcon() {
+        return Icon.sprite32(icons, 1, 0);
     }
 
     @Override
