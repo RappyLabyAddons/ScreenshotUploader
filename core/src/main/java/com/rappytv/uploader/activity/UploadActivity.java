@@ -36,7 +36,7 @@ public class UploadActivity extends SimpleActivity {
 
         FlexibleContentWidget windowWidget = new FlexibleContentWidget().addId("window");
         HorizontalListWidget headerWidget = new HorizontalListWidget().addId("header");
-        ComponentWidget titleWidget = ComponentWidget.text("Upload Screenshot").addId("title");
+        ComponentWidget titleWidget = ComponentWidget.i18n("uploader.activity.title").addId("title");
         VerticalListWidget<Widget> content = new VerticalListWidget<>().addId("content");
 
         headerWidget.addEntry(titleWidget);
@@ -48,48 +48,48 @@ public class UploadActivity extends SimpleActivity {
             IconWidget icon = new IconWidget(uploader.getIcon()).addId("icon");
             ComponentWidget name = ComponentWidget.text(uploader.getName()).addId("name");
             ButtonWidget button = new ButtonWidget()
-                .updateComponent(Component.text("Upload"))
+                .updateComponent(Component.translatable("uploader.activity.button"))
                 .addId("button");
 
             button.setActionListener(() -> {
                 button.setEnabled(false);
-                button.updateComponent(Component.text("Uploading", NamedTextColor.AQUA));
+                button.updateComponent(Component.translatable("uploader.activity.uploading", NamedTextColor.AQUA));
                 ApiRequest request = new ApiRequest(uploader, file);
                 request.sendAsyncRequest().thenAccept((result) -> {
                     if(request.isSuccessful()) {
                         button.setEnabled(true);
-                        button.updateComponent(Component.text("Copy", NamedTextColor.GREEN));
+                        button.updateComponent(Component.translatable("uploader.activity.copy", NamedTextColor.GREEN));
                         Laby.labyAPI().notificationController().push(
                             Notification.builder()
-                                .title(Component.text("Success!"))
-                                .text(Component.text("Your screenshot was successfully uploaded to " + uploader.getName() + "!"))
+                                .title(Component.translatable("uploader.toast.success"))
+                                .text(Component.translatable("uploader.activity.uploaded", Component.text(uploader.getName())))
                                 .build()
                         );
                         button.setActionListener(() -> {
                             Laby.labyAPI().notificationController().push(
                                 Notification.builder()
-                                    .title(Component.text("Success!"))
-                                    .text(Component.text("The link was copied to your clipboard!"))
+                                    .title(Component.translatable("uploader.toast.success"))
+                                    .text(Component.translatable("uploader.activity.copied"))
                                     .build()
                             );
                             Laby.labyAPI().minecraft().chatExecutor().copyToClipboard(!request.getUploadLink().isBlank() ? request.getUploadLink() : "");
                         });
                     } else {
                         button.setEnabled(true);
-                        button.updateComponent(Component.text("Error", NamedTextColor.RED));
+                        button.updateComponent(Component.translatable("uploader.activity.error", NamedTextColor.RED));
                         Laby.labyAPI().notificationController().push(
                             Notification.builder()
-                                .title(Component.text("An error ocurred!"))
+                                .title(Component.translatable("uploader.toast.error"))
                                 .text(Component.text(request.getError()))
                                 .build()
                         );
                     }
                 }).exceptionally((e) -> {
                     button.setEnabled(true);
-                    button.updateComponent(Component.text("Error", NamedTextColor.RED));
+                    button.updateComponent(Component.translatable("uploader.activity.error", NamedTextColor.RED));
                     Laby.labyAPI().notificationController().push(
                         Notification.builder()
-                            .title(Component.text("An error ocurred!"))
+                            .title(Component.translatable("uploader.toast.error"))
                             .text(Component.text(e.getMessage()))
                             .build()
                     );
