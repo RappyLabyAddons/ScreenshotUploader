@@ -29,11 +29,6 @@ public class EShareUploader extends Uploader {
     }
 
     @Override
-    public int getStatus(HttpResponse<String> response) {
-        return response.statusCode();
-    }
-
-    @Override
     public String getError(HttpResponse<String> response) {
         try {
             JsonObject object = JsonParser.parseString(response.body()).getAsJsonObject();

@@ -28,7 +28,6 @@ public abstract class Uploader {
     public abstract String getMethod();
     public abstract String getUri();
     public abstract String[] getAuth();
-    public abstract int getStatus(HttpResponse<String> response);
     public abstract String getError(HttpResponse<String> response);
     public abstract String resolveUrl(HttpResponse<String> response);
     public MultipartData getMultipartData(File file) throws IOException {

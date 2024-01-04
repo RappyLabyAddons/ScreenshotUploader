@@ -29,18 +29,6 @@ public class ZiplineUploader extends Uploader {
     }
 
     @Override
-    public int getStatus(HttpResponse<String> response) {
-        try {
-            JsonObject object = JsonParser.parseString(response.body()).getAsJsonObject();
-
-            return object.has("code") ? object.get("code").getAsInt() : response.statusCode();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return response.statusCode();
-        }
-    }
-
-    @Override
     public String getError(HttpResponse<String> response) {
         try {
             JsonObject object = JsonParser.parseString(response.body()).getAsJsonObject();
