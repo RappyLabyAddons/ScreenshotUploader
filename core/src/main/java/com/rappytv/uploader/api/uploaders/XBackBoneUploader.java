@@ -14,7 +14,7 @@ import java.net.http.HttpResponse;
 public class XBackBoneUploader extends Uploader {
 
     public XBackBoneUploader(UploaderAddon addon) {
-        super("xbackbone", addon);
+        super("XBackBone", addon);
     }
 
     @Override

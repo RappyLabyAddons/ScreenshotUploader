@@ -11,7 +11,7 @@ import java.net.http.HttpResponse;
 public class EShareUploader extends Uploader {
 
     public EShareUploader(UploaderAddon addon) {
-        super("eshare", addon);
+        super("EShare", addon);
     }
 
     @Override

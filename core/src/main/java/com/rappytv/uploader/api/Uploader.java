@@ -14,9 +14,11 @@ public abstract class Uploader {
     private static final Map<String, Uploader> uploaders = new HashMap<>();
     protected static final ResourceLocation icons = ResourceLocation.create("uploader", "themes/vanilla/textures/settings.png");
     protected final UploaderAddon addon;
+    private final String name;
 
     public Uploader(String name, UploaderAddon addon) {
         this.addon = addon;
+        this.name = name;
         uploaders.put(name.toLowerCase(), this);
     }
 
@@ -26,6 +28,10 @@ public abstract class Uploader {
 
     public static Uploader get(String id) {
         return uploaders.get(id.toLowerCase());
+    }
+
+    public String getName() {
+        return name;
     }
 
     public abstract Icon getIcon();

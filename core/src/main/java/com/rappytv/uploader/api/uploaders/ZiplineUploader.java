@@ -11,7 +11,7 @@ import java.net.http.HttpResponse;
 public class ZiplineUploader extends Uploader {
 
     public ZiplineUploader(UploaderAddon addon) {
-        super("zipline", addon);
+        super("Zipline", addon);
     }
 
     @Override

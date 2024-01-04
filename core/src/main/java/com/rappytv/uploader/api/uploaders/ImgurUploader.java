@@ -14,7 +14,7 @@ import java.net.http.HttpResponse;
 public class ImgurUploader extends Uploader {
 
     public ImgurUploader(UploaderAddon addon) {
-        super("imgur", addon);
+        super("Imgur", addon);
     }
 
     @Override
