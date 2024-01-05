@@ -30,26 +30,27 @@ public class ApiRequest {
                 .uri(new URI(uploader.getUri()))
                 .header("Content-Type", data.getContentType())
                 .header(uploader.getAuth()[0], uploader.getAuth()[1])
-                .method(uploader.getMethod(), data.getBodyPublisher())
+                .method("POST", data.getBodyPublisher())
                 .build();
 
             HttpClient client = HttpClient.newHttpClient();
             client
                 .sendAsync(request, BodyHandlers.ofString())
                 .thenAccept((response) -> {
-                    int status = uploader.getStatus(response);
-                    successful = status >= 200 && status <= 299;
+                    successful = response.statusCode() >= 200 && response.statusCode() <= 299;
                     uploadLink = uploader.resolveUrl(response);
                     if(!successful) error = uploader.getError(response);
                     future.complete(null);
                 })
                 .exceptionally((e) -> {
                     future.completeExceptionally(e);
+                    successful = false;
                     error = e.getMessage();
                     return null;
                 });
         } catch (Exception e) {
             error = e.getMessage();
+            successful = false;
             future.completeExceptionally(e);
         }
 

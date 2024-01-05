@@ -5,6 +5,7 @@ import com.google.gson.JsonParser;
 import com.rappytv.uploader.UploaderAddon;
 import com.rappytv.uploader.api.MultipartData;
 import com.rappytv.uploader.api.Uploader;
+import net.labymod.api.client.gui.icon.Icon;
 import net.labymod.api.util.I18n;
 import java.io.File;
 import java.io.IOException;
@@ -13,12 +14,12 @@ import java.net.http.HttpResponse;
 public class ImgurUploader extends Uploader {
 
     public ImgurUploader(UploaderAddon addon) {
-        super("imgur", addon);
+        super("Imgur", addon);
     }
 
     @Override
-    public String getMethod() {
-        return "POST";
+    public Icon getIcon() {
+        return Icon.sprite32(icons, 1, 1);
     }
 
     @Override
@@ -29,11 +30,6 @@ public class ImgurUploader extends Uploader {
     @Override
     public String[] getAuth() {
         return new String[]{"Authorization", "Client-ID (this is just a placeholder)"};
-    }
-
-    @Override
-    public int getStatus(HttpResponse<String> response) {
-        return response.statusCode();
     }
 
     @Override

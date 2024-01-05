@@ -1,7 +1,7 @@
 rootProject.name = "ScreenshotUploader"
 
 pluginManagement {
-    val labyGradlePluginVersion = "0.3.40"
+    val labyGradlePluginVersion = "0.3.43"
     plugins {
         id("net.labymod.gradle") version (labyGradlePluginVersion)
     }

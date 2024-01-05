@@ -10,6 +10,9 @@
             "enabled": {
                 "name": "Enabled"
             },
+            "askBeforeDoubleUploads": {
+                "name": "Ask before double uploads"
+            },
             "uploader": {
                 "name": "Uploader",
                 "entries": {
@@ -52,16 +55,26 @@
         "upload": {
             "noToken": "Please provide the API Key for your uploader in the addon config.",
             "file": "File not found!",
+            "already": "You've already opened the menu for this screenshot! %s",
+            "openAnyway": "Want to open it anyway?",
             "upload": "Click here to upload the screenshot!",
-            "uploading": "Uploading screenshot...",
-            "uploaded": "Screenshot uploaded! %s",
             "hover": "Clickable",
-            "copy": "[COPY URL]",
             "emptyError": "Empty error!",
             "xError": "An unknown error ocurred! Please check your XBackBone configuration!",
             "ziplineError": "An unknown error ocurred! Please check your Zipline configuration!"
         },
+        "activity": {
+            "title": "Upload Screenshot",
+            "noAuth": "No Auth",
+            "button": "Upload",
+            "uploading": "Uploading",
+            "copy": "Copy",
+            "error": "Error",
+            "uploaded": "Your screenshot was successfully uploaded to %s!",
+            "copied": "The link was copied to your clipboard!"
+        },
         "toast": {
+            "success": "Success!",
             "error": "An error ocurred!",
             "http": "The base must start with http:// or https://",
             "slash": "The base must not end with a /"

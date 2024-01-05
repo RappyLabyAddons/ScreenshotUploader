@@ -1,8 +1,8 @@
 package com.rappytv.uploader.command;
 
 import com.rappytv.uploader.UploaderAddon;
-import com.rappytv.uploader.api.ApiRequest;
-import com.rappytv.uploader.api.Uploader;
+import com.rappytv.uploader.activity.UploadActivity;
+import net.labymod.api.Laby;
 import net.labymod.api.client.chat.command.Command;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.event.ClickEvent;
@@ -11,10 +11,13 @@ import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.client.component.format.Style;
 import net.labymod.api.client.component.format.TextDecoration;
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 
 public class UploadCommand extends Command {
 
     private final UploaderAddon addon;
+    private final Set<String> history = new HashSet<>();
 
     public UploadCommand(UploaderAddon addon) {
         super("supload");
@@ -23,11 +26,6 @@ public class UploadCommand extends Command {
 
     @Override
     public boolean execute(String prefix, String[] args) {
-        Uploader uploader = addon.configuration().uploader();
-        if(uploader.getAuth()[1].isBlank()) {
-            displayMessage(UploaderAddon.prefix.copy().append(Component.translatable("uploader.upload.noToken", NamedTextColor.RED)));
-            return true;
-        }
         if(args.length < 1) {
             displayMessage(UploaderAddon.prefix.copy().append(Component.translatable("uploader.upload.file", NamedTextColor.RED)));
             return true;
@@ -37,41 +35,31 @@ public class UploadCommand extends Command {
             displayMessage(UploaderAddon.prefix.copy().append(Component.translatable("uploader.upload.file", NamedTextColor.RED)));
             return true;
         }
-        displayMessage(UploaderAddon.prefix.copy().append(Component.translatable("uploader.upload.uploading", NamedTextColor.GRAY)));
-        ApiRequest request = new ApiRequest(uploader, file);
-        request.sendAsyncRequest().thenAccept((result) -> {
-            if(request.isSuccessful()) {
-                Component copy = Component.translatable(
-                    "uploader.upload.copy",
-                    Style.empty()
-                        .color(NamedTextColor.AQUA)
-                        .decorate(TextDecoration.BOLD)
-                        .hoverEvent(HoverEvent.showText(Component.translatable("uploader.upload.hover").color(NamedTextColor.GREEN)))
-                        .clickEvent(ClickEvent.copyToClipboard(!request.getUploadLink().isBlank() ? request.getUploadLink() : ""))
-                );
-                Component component = Component.translatable(
-                    "uploader.upload.uploaded",
-                    !request.getUploadLink().isBlank() ? copy : Component.text("")
-                ).color(NamedTextColor.GRAY);
-
-                displayMessage(UploaderAddon.prefix.copy().append(component));
-            } else {
-                displayMessage(
-                    UploaderAddon.prefix.copy().append(Component.text(
-                        request.getError(),
-                        NamedTextColor.RED
+        if(history.contains(file.getName()) && addon.configuration().askBeforeDoubleUploads()) {
+            if(args.length < 2 || !args[1].equalsIgnoreCase("force")) {
+                displayMessage(UploaderAddon.prefix.copy().append(
+                    Component.translatable(
+                        "uploader.upload.already",
+                        NamedTextColor.RED,
+                        Component.translatable(
+                            "uploader.upload.openAnyway",
+                            Style.empty()
+                                .color(NamedTextColor.RED)
+                                .decorate(TextDecoration.UNDERLINED)
+                                .hoverEvent(HoverEvent.showText(Component.translatable("uploader.upload.hover", NamedTextColor.GREEN)))
+                                .clickEvent(ClickEvent.runCommand(String.format(
+                                    "/%s %s force",
+                                    prefix,
+                                    file.getName()
+                                )))
+                        )
                     ))
                 );
+                return true;
             }
-        }).exceptionally((e) -> {
-            displayMessage(
-                UploaderAddon.prefix.copy().append(Component.text(
-                    e.getMessage(),
-                    NamedTextColor.RED
-                ))
-            );
-            return null;
-        });
+        }
+        history.add(file.getName());
+        Laby.labyAPI().minecraft().executeNextTick(() -> Laby.labyAPI().minecraft().minecraftWindow().displayScreen(new UploadActivity(file)));
         return true;
     }
 }

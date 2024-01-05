@@ -1,0 +1,53 @@
+.window {
+    left: 50%;
+    top: 50%;
+    width: 200;
+    height: 140;
+    alignment-x: center;
+    alignment-y: center;
+    background-color: rgba(20, 20, 20, 0.9);
+    border: 1 dark_gray;
+
+    .header {
+        left: 50%;
+        width: 100%;
+        height: 20;
+        padding: 0 2 0 2;
+        background-color: rgba(10, 10, 10, 0.4);
+
+        .title {
+            alignment: center;
+        }
+    }
+
+    .content {
+        width: 100%;
+        height: 100%;
+        margin: 10;
+        alignment-x: center;
+        alignment-y: center;
+        overwrite-width: false;
+
+        .uploader {
+            left: 50%;
+            width: 100%;
+            height: 20;
+            margin-bottom: 5;
+            space-between-entries: 5;
+
+            .icon {
+                width: 16;
+                height: width;
+                alignment: left;
+            }
+
+            .name {
+
+            }
+
+            .button {
+                alignment: right;
+            }
+        }
+    }
+}
