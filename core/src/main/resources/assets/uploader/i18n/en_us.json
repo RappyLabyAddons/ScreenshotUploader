@@ -42,6 +42,11 @@
             },
             "zipline": {
                 "name": "Zipline Options",
+                "header": {
+                    "settings": {
+                        "name": "Upload settings"
+                    }
+                },
                 "base": {
                     "name": "Base URL",
                     "description": "Scheme: §bhttp(s)://<base>\n§fExample: §bhttps://media.rappytv.com"
@@ -49,6 +54,33 @@
                 "auth": {
                     "name": "Zipline Token",
                     "description": "You can find this Token in your user settings"
+                },
+                "domains": {
+                    "name": "Domain (Optional)",
+                    "description": "Override the default domain(s). Type in a URL, e.g example.com"
+                },
+                "nameFormat": {
+                    "name": "Name Format",
+                    "description": "The file name format to use when uploading files.",
+                    "entries": {
+                        "default": "Default",
+                        "random": "Random",
+                        "date": "Date",
+                        "uuid": "UUID",
+                        "gfycat": "Gfycat"
+                    }
+                },
+                "zeroWidth": {
+                    "name": "Zero width names",
+                    "description": "Whether or not to use zero width characters for file names."
+                },
+                "embed": {
+                    "name": "Embed",
+                    "description": "Whether or not to embed uploaded files with OG tags."
+                },
+                "compression": {
+                    "name": "Image Compression in %",
+                    "description": "The compression level to use when uploading files."
                 }
             }
         },
