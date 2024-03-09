@@ -28,7 +28,7 @@ public class ImgurUploader extends Uploader {
     }
 
     @Override
-    public String[] getAuth() {
+    public String[] getHeaders() {
         return new String[]{"Authorization", "Client-ID (this is just a placeholder)"};
     }
 

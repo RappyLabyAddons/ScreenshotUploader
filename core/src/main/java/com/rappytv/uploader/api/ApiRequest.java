@@ -29,7 +29,7 @@ public class ApiRequest {
             HttpRequest request = HttpRequest.newBuilder()
                 .uri(new URI(uploader.getUri()))
                 .header("Content-Type", data.getContentType())
-                .header(uploader.getAuth()[0], uploader.getAuth()[1])
+                .headers(uploader.getHeaders())
                 .method("POST", data.getBodyPublisher())
                 .build();
 

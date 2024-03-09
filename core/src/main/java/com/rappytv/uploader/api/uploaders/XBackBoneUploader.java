@@ -28,7 +28,7 @@ public class XBackBoneUploader extends Uploader {
     }
 
     @Override
-    public String[] getAuth() {
+    public String[] getHeaders() {
         return new String[]{"token", addon.configuration().xbackbone().auth()};
     }
 
@@ -61,7 +61,7 @@ public class XBackBoneUploader extends Uploader {
         return MultipartData
             .newBuilder()
             .addFile("file", file.toPath(), "image/png")
-            .addText(getAuth()[0], getAuth()[1])
+            .addText(getHeaders()[0], getHeaders()[1])
             .build();
     }
 }
