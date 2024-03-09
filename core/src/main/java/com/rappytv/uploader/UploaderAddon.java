@@ -7,12 +7,15 @@ import com.rappytv.uploader.api.uploaders.ZiplineUploader;
 import com.rappytv.uploader.command.UploadCommand;
 import com.rappytv.uploader.config.UploaderConfig;
 import com.rappytv.uploader.listener.ScreenshotListener;
+import net.labymod.api.Laby;
 import net.labymod.api.addon.LabyAddon;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.client.component.format.Style;
 import net.labymod.api.client.component.format.TextDecoration;
 import net.labymod.api.models.addon.annotation.AddonMain;
+import net.labymod.api.revision.SimpleRevision;
+import net.labymod.api.util.version.SemanticVersion;
 
 @AddonMain
 public class UploaderAddon extends LabyAddon<UploaderConfig> {
@@ -20,6 +23,11 @@ public class UploaderAddon extends LabyAddon<UploaderConfig> {
     public static Component prefix = Component.empty()
         .append(Component.text("UPLOADER", Style.empty().color(NamedTextColor.BLUE).decorate(TextDecoration.BOLD)))
         .append(Component.text(" » ", NamedTextColor.DARK_GRAY));
+
+    @Override
+    protected void preConfigurationLoad() {
+        Laby.references().revisionRegistry().register(new SimpleRevision("uploader", new SemanticVersion("1.0.3"), "2024-03-09"));
+    }
 
     @Override
     protected void enable() {

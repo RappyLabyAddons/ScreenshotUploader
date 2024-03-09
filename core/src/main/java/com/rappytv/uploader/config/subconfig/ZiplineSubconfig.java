@@ -8,6 +8,7 @@ import net.labymod.api.client.gui.screen.widget.widgets.input.SwitchWidget.Switc
 import net.labymod.api.client.gui.screen.widget.widgets.input.TextFieldWidget.TextFieldSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.dropdown.DropdownWidget.DropdownSetting;
 import net.labymod.api.configuration.loader.Config;
+import net.labymod.api.configuration.loader.annotation.IntroducedIn;
 import net.labymod.api.configuration.loader.property.ConfigProperty;
 import net.labymod.api.configuration.settings.annotation.SettingRequires;
 import net.labymod.api.configuration.settings.annotation.SettingSection;
@@ -41,15 +42,20 @@ public class ZiplineSubconfig extends Config {
     @TextFieldSetting
     private final ConfigProperty<String> auth = new ConfigProperty<>("");
     @SettingSection("settings")
+    @IntroducedIn(namespace = "uploader", value = "1.0.3")
     @TextFieldSetting
     private final ConfigProperty<String> domains = new ConfigProperty<>("");
+    @IntroducedIn(namespace = "uploader", value = "1.0.3")
     @SettingRequires(value = "zeroWidth", invert = true)
     @DropdownSetting
     private final ConfigProperty<ZiplineNameFormat> nameFormat = new ConfigProperty<>(ZiplineNameFormat.DEFAULT);
+    @IntroducedIn(namespace = "uploader", value = "1.0.3")
     @SwitchSetting
     private final ConfigProperty<Boolean> zeroWidth = new ConfigProperty<>(false);
+    @IntroducedIn(namespace = "uploader", value = "1.0.3")
     @SwitchSetting
     private final ConfigProperty<Boolean> embed = new ConfigProperty<>(true);
+    @IntroducedIn(namespace = "uploader", value = "1.0.3")
     @SliderSetting(min = 0, max = 100, steps = 10f)
     private final ConfigProperty<Integer> compression = new ConfigProperty<>(0);
 
