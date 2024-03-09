@@ -25,7 +25,7 @@ public class EShareUploader extends Uploader {
     }
 
     @Override
-    public String[] getAuth() {
+    public String[] getHeaders() {
         return new String[]{"api-key", addon.configuration().eshare().auth()};
     }
 

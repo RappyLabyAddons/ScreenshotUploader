@@ -48,7 +48,7 @@ public class UploadActivity extends SimpleActivity {
             IconWidget icon = new IconWidget(uploader.getIcon()).addId("icon");
             ComponentWidget name = ComponentWidget.text(uploader.getName()).addId("name");
             ButtonWidget button = new ButtonWidget().addId("button");
-            if(uploader.getAuth()[1].isBlank()) {
+            if(uploader.getHeaders()[1].isBlank()) {
                 button.setEnabled(false);
                 button.updateComponent(Component.translatable("uploader.activity.noAuth", NamedTextColor.RED));
             } else button.updateComponent(Component.translatable("uploader.activity.button"));
