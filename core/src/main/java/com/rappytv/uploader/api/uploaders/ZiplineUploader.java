@@ -25,8 +25,15 @@ public class ZiplineUploader extends Uploader {
     }
 
     @Override
-    public String[] getAuth() {
-        return new String[]{"Authorization", addon.configuration().zipline().auth()};
+    public String[] getHeaders() {
+        return new String[]{
+            "Authorization", addon.configuration().zipline().auth(),
+            "Format", addon.configuration().zipline().nameFormat().name().toUpperCase(),
+            "Image-Compression-Percent", addon.configuration().zipline().compression() + "",
+            "Zws", addon.configuration().zipline().zeroWidth() + "",
+            "Override-Domain", addon.configuration().zipline().domains(),
+            "Embed", addon.configuration().zipline().embed() + ""
+        };
     }
 
     @Override
