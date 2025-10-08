@@ -47,7 +47,7 @@
                 },
                 "domains": {
                     "name": "Domain (Optional)",
-                    "description": "Override the default domain(s).Type one or more domains separated by commas. Given a comma separated list of domains, Zipline will randomly select one of the domains from that list to use like above.\nExample: §bmedia.example.com,media2.example.com"
+                    "description": "Override the default domain(s). Type one or more domains separated by commas. Given a comma separated list of domains, Zipline will randomly select one of the domains from that list to use like above.\nExample: §bmedia.example.com,media2.example.com"
                 },
                 "nameFormat": {
                     "name": "Name Format",
