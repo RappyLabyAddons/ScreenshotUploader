@@ -4,10 +4,11 @@ import net.labymod.api.client.gui.screen.widget.widgets.input.TextFieldWidget.Te
 import net.labymod.api.configuration.loader.Config;
 import net.labymod.api.configuration.loader.property.ConfigProperty;
 
-public class XBackBoneSubconfig extends Config {
+public class XBackBoneConfig extends Config {
 
     @TextFieldSetting
     private final ConfigProperty<String> base = new ConfigProperty<>("https://example.org");
+
     @TextFieldSetting
     private final ConfigProperty<String> auth = new ConfigProperty<>("");
 

@@ -6,7 +6,7 @@ import com.rappytv.screenshotuploader.api.ScreenshotUploaderTextures.SpriteUploa
 import com.rappytv.screenshotuploader.api.UploadException;
 import com.rappytv.screenshotuploader.api.Uploader;
 import com.rappytv.screenshotuploader.core.ScreenshotUploaderAddon;
-import com.rappytv.screenshotuploader.core.config.subconfig.ZiplineSubconfig;
+import com.rappytv.screenshotuploader.core.config.subconfig.ZiplineConfig;
 import java.io.File;
 import java.io.IOException;
 import net.labymod.api.client.gui.icon.Icon;
@@ -16,7 +16,7 @@ import net.labymod.api.util.io.web.request.Request.Method;
 import net.labymod.api.util.io.web.request.Response;
 import org.jetbrains.annotations.NotNull;
 
-public class ZiplineUploader extends Uploader<ZiplineSubconfig> {
+public class ZiplineUploader extends Uploader<ZiplineConfig> {
 
     private final ScreenshotUploaderAddon addon;
 
@@ -31,7 +31,7 @@ public class ZiplineUploader extends Uploader<ZiplineSubconfig> {
     }
 
     @Override
-    public @NotNull ZiplineSubconfig getConfig() {
+    public @NotNull ZiplineConfig getConfig() {
         return this.addon.configuration().zipline();
     }
 

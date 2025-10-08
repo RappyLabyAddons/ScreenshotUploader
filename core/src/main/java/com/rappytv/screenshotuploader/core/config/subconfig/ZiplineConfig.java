@@ -8,7 +8,7 @@ import net.labymod.api.configuration.loader.annotation.IntroducedIn;
 import net.labymod.api.configuration.loader.property.ConfigProperty;
 import net.labymod.api.configuration.settings.annotation.SettingSection;
 
-public class ZiplineSubconfig extends Config {
+public class ZiplineConfig extends Config {
 
     @TextFieldSetting
     private final ConfigProperty<String> base = new ConfigProperty<>("https://example.org");

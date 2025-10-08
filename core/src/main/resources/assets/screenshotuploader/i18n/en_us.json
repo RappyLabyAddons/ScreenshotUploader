@@ -13,20 +13,10 @@
             "askBeforeDoubleUploads": {
                 "name": "Ask before double uploads"
             },
-            "uploader": {
-                "name": "Uploader",
-                "entries": {
-                    "eshare": "e.share",
-                    "imgur": "Imgur",
-                    "xbackbone": "XBackBone",
-                    "zipline": "Zipline"
-                }
-            },
-            "eshare": {
-                "name": "e.share Options",
+            "imgur": {
+                "name": "Imgur Options",
                 "auth": {
-                    "name": "API Key",
-                    "description": "You can find your API Key at §bhttps://share.ebio.gg/dashboard"
+                    "name": "Client ID (optional)"
                 }
             },
             "xbackbone": {

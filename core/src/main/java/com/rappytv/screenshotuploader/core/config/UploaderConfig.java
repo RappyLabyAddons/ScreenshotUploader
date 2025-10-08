@@ -1,7 +1,8 @@
 package com.rappytv.screenshotuploader.core.config;
 
-import com.rappytv.screenshotuploader.core.config.subconfig.XBackBoneSubconfig;
-import com.rappytv.screenshotuploader.core.config.subconfig.ZiplineSubconfig;
+import com.rappytv.screenshotuploader.core.config.subconfig.ImgurConfig;
+import com.rappytv.screenshotuploader.core.config.subconfig.XBackBoneConfig;
+import com.rappytv.screenshotuploader.core.config.subconfig.ZiplineConfig;
 import net.labymod.api.addon.AddonConfig;
 import net.labymod.api.client.gui.screen.widget.widgets.input.SwitchWidget.SwitchSetting;
 import net.labymod.api.configuration.loader.annotation.SpriteSlot;
@@ -21,11 +22,14 @@ public class UploaderConfig extends AddonConfig {
     private final ConfigProperty<Boolean> askBeforeDoubleUploads = new ConfigProperty<>(true);
 
     @SettingSection("uploaders")
+    @SpriteSlot(size = 32, y = 1, x = 1)
+    private final ImgurConfig imgur = new ImgurConfig();
+
     @SpriteSlot(size = 32, y = 1, x = 2)
-    private final XBackBoneSubconfig xbackbone = new XBackBoneSubconfig();
+    private final XBackBoneConfig xbackbone = new XBackBoneConfig();
 
     @SpriteSlot(size = 32, y = 1, x = 3)
-    private final ZiplineSubconfig zipline = new ZiplineSubconfig();
+    private final ZiplineConfig zipline = new ZiplineConfig();
 
     @Override
     public ConfigProperty<Boolean> enabled() {
@@ -36,11 +40,15 @@ public class UploaderConfig extends AddonConfig {
         return this.askBeforeDoubleUploads;
     }
 
-    public XBackBoneSubconfig xbackbone() {
+    public ImgurConfig imgur() {
+        return this.imgur;
+    }
+
+    public XBackBoneConfig xbackbone() {
         return this.xbackbone;
     }
 
-    public ZiplineSubconfig zipline() {
+    public ZiplineConfig zipline() {
         return this.zipline;
     }
 

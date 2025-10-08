@@ -5,7 +5,7 @@ import com.rappytv.screenshotuploader.api.ScreenshotUploaderTextures.SpriteUploa
 import com.rappytv.screenshotuploader.api.UploadException;
 import com.rappytv.screenshotuploader.api.Uploader;
 import com.rappytv.screenshotuploader.core.ScreenshotUploaderAddon;
-import com.rappytv.screenshotuploader.core.config.subconfig.XBackBoneSubconfig;
+import com.rappytv.screenshotuploader.core.config.subconfig.XBackBoneConfig;
 import java.io.File;
 import java.io.IOException;
 import net.labymod.api.client.gui.icon.Icon;
@@ -15,7 +15,7 @@ import net.labymod.api.util.io.web.request.Request.Method;
 import net.labymod.api.util.io.web.request.Response;
 import org.jetbrains.annotations.NotNull;
 
-public class XBackBoneUploader extends Uploader<XBackBoneSubconfig> {
+public class XBackBoneUploader extends Uploader<XBackBoneConfig> {
 
     private final ScreenshotUploaderAddon addon;
 
@@ -30,7 +30,7 @@ public class XBackBoneUploader extends Uploader<XBackBoneSubconfig> {
     }
 
     @Override
-    public @NotNull XBackBoneSubconfig getConfig() {
+    public @NotNull XBackBoneConfig getConfig() {
         return this.addon.configuration().xbackbone();
     }
 
@@ -46,7 +46,7 @@ public class XBackBoneUploader extends Uploader<XBackBoneSubconfig> {
     }
 
     @Override
-    public String uploadScreenshot(File file) throws UploadException {
+    public String uploadScreenshot(File file) throws UploadException { // TODO: This needs to be tested
         FormData fileData;
 
         try {

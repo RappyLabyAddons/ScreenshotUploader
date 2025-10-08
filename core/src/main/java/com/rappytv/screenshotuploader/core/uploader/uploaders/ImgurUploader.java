@@ -5,7 +5,8 @@ import com.google.gson.JsonObject;
 import com.rappytv.screenshotuploader.api.ScreenshotUploaderTextures.SpriteUploaders;
 import com.rappytv.screenshotuploader.api.UploadException;
 import com.rappytv.screenshotuploader.api.Uploader;
-import com.rappytv.screenshotuploader.api.Uploader.EmptyConfig;
+import com.rappytv.screenshotuploader.core.ScreenshotUploaderAddon;
+import com.rappytv.screenshotuploader.core.config.subconfig.ImgurConfig;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,12 +19,15 @@ import net.labymod.api.util.io.web.request.Request.Method;
 import net.labymod.api.util.io.web.request.Response;
 import org.jetbrains.annotations.NotNull;
 
-public class ImgurUploader extends Uploader<EmptyConfig> {
+public class ImgurUploader extends Uploader<ImgurConfig> {
 
     private static final String UPLOAD_ENDPOINT = "https://api.imgur.com/3/upload";
 
-    public ImgurUploader() {
+    private final ScreenshotUploaderAddon addon;
+
+    public ImgurUploader(ScreenshotUploaderAddon addon) {
         super("imgur", "Imgur");
+        this.addon = addon;
     }
 
     @Override
@@ -32,8 +36,8 @@ public class ImgurUploader extends Uploader<EmptyConfig> {
     }
 
     @Override
-    public @NotNull EmptyConfig getConfig() {
-        return new EmptyConfig();
+    public @NotNull ImgurConfig getConfig() {
+        return this.addon.configuration().imgur();
     }
 
     @Override
@@ -50,12 +54,14 @@ public class ImgurUploader extends Uploader<EmptyConfig> {
                 .value("Screenshot taken by " + Laby.labyAPI().getName())
                 .build()
         );
-        formData.add(
-            FormData.builder()
-                .name("description")
-                .value("Uploaded using the ScreenshotUploader LabyMod Addon")
-                .build()
-        );
+        if(this.getConfig().addDescription().get()) {
+            formData.add(
+                FormData.builder()
+                    .name("description")
+                    .value("Uploaded using the ScreenshotUploader LabyMod Addon")
+                    .build()
+            );
+        }
 
         try {
             formData.add(
@@ -70,10 +76,14 @@ public class ImgurUploader extends Uploader<EmptyConfig> {
             throw new UploadException(e, this);
         }
 
+        String auth = this.getConfig().auth().get();
+        String clientId = !auth.isBlank() ? auth : Laby.labyAPI().getUniqueId().toString();
+
         Response<JsonObject> response = Request.ofGson(JsonObject.class)
-            .url(UPLOAD_ENDPOINT + "?client_id=" + Laby.labyAPI().getUniqueId())
+            .url(UPLOAD_ENDPOINT + "?client_id=" + clientId)
             .method(Method.POST)
             .form(formData)
+            .addHeader("Authorization", !auth.isBlank() ? "Client-ID " + auth : "")
             .handleErrorStream()
             .executeSync();
 

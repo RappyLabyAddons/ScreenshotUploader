@@ -39,7 +39,7 @@ public class ScreenshotUploaderAddon extends LabyAddon<UploaderConfig> {
         this.registerSettingCategory();
         this.registerCommand(new UploadCommand(this));
         this.registerListener(new ScreenshotListener());
-        uploaderRegistry().registerUploader(new ImgurUploader());
+        uploaderRegistry().registerUploader(new ImgurUploader(this));
         uploaderRegistry().registerUploader(new XBackBoneUploader(this));
         uploaderRegistry().registerUploader(new ZiplineUploader(this));
     }
