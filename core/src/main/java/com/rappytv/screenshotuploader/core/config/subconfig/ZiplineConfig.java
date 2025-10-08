@@ -6,10 +6,12 @@ import net.labymod.api.client.gui.screen.widget.widgets.input.dropdown.DropdownW
 import net.labymod.api.configuration.loader.Config;
 import net.labymod.api.configuration.loader.annotation.IntroducedIn;
 import net.labymod.api.configuration.loader.property.ConfigProperty;
+import net.labymod.api.configuration.settings.annotation.CustomTranslation;
 import net.labymod.api.configuration.settings.annotation.SettingSection;
 
 public class ZiplineConfig extends Config {
 
+    @CustomTranslation("screenshotuploader.settings.general.baseUrl")
     @TextFieldSetting
     private final ConfigProperty<String> base = new ConfigProperty<>("https://example.org");
 

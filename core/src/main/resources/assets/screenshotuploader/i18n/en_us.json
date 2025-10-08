@@ -12,6 +12,12 @@
             "askBeforeDoubleUploads": {
                 "name": "Ask before duplicate uploads"
             },
+            "general": {
+                "baseUrl": {
+                    "name": "Base URL",
+                    "description": "Scheme: §bhttp(s)://<base>\n§fExample: §bhttps://media.rappytv.com"
+                }
+            },
             "imgur": {
                 "name": "Imgur Options",
                 "auth": {
@@ -20,10 +26,6 @@
             },
             "xbackbone": {
                 "name": "XBackBone Options",
-                "base": {
-                    "name": "Base URL",
-                    "description": "Scheme: §bhttp(s)://<base>\n§fExample: §bhttps://media.rappytv.com"
-                },
                 "auth": {
                     "name": "XBackBone Token",
                     "description": "You can find this token in your user profile"
@@ -35,10 +37,6 @@
                     "settings": {
                         "name": "Upload settings"
                     }
-                },
-                "base": {
-                    "name": "Base URL",
-                    "description": "Scheme: §bhttp(s)://<base>\n§fExample: §bhttps://media.rappytv.com"
                 },
                 "auth": {
                     "name": "Zipline Token",
