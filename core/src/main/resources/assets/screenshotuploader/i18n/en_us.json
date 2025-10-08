@@ -60,7 +60,6 @@
                     }
                 },
                 "zeroWidth": {
-                    "name": "Zero width names",
                     "description": "Whether or not to use zero width characters for file names."
                 },
                 "embed": {
