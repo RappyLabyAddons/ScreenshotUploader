@@ -74,7 +74,19 @@
             "upload": "%s hochladen"
         },
         "activity": {
-            "title": "Screenshot hochladen"
+            "title": "Screenshot hochladen",
+            "invalidConfig": "Dieser Uploader hat ungültige Optionen. Bitte überprüfe die jeweilige Konfiguration nach Fehlern.",
+            "upload": "Hochladen",
+            "uploading": "Lädt hoch",
+            "error": "Fehler",
+            "checkTheLog": "Bitte überprüfe den Log für mehr Details.",
+            "copy": "Kopieren",
+            "uploaded": "Dein Screenshot wurde erfolgreich auf %s hochgeladen!",
+            "copied": "Der Link wurde in deine Zwischenablage kopiert!"
+        },
+        "notification": {
+            "success": "Erfolg!",
+            "error": "Ein Fehler ist aufgetreten!"
         }
     }
 }
