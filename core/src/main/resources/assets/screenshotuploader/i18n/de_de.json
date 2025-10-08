@@ -1,0 +1,90 @@
+{
+    "screenshotuploader": {
+        "settings": {
+            "header": {
+                "uploaders": {
+                    "name": "Uploader Einstellungen"
+                }
+            },
+            "enabled": {
+                "name": "Aktiviert"
+            },
+            "askBeforeDoubleUploads": {
+                "name": "Vor doppelten Uploads fragen"
+            },
+            "general": {
+                "baseUrl": {
+                    "name": "Basis-URL",
+                    "description": "Schema: §bhttp(s)://<basis>\n§fBeispiel: §bhttps://media.rappytv.com"
+                }
+            },
+            "imgur": {
+                "name": "Imgur Optionen",
+                "auth": {
+                    "name": "Client-ID (optional)"
+                }
+            },
+            "xbackbone": {
+                "name": "XBackBone Optionen",
+                "auth": {
+                    "name": "XBackBone Token",
+                    "description": "Du kannst diesen Token in deinem Nutzerprofil finden"
+                }
+            },
+            "zipline": {
+                "name": "Zipline Optionen",
+                "header": {
+                    "settings": {
+                        "name": "Upload Einstellungen"
+                    }
+                },
+                "auth": {
+                    "name": "Zipline Token",
+                    "description": "Du kannst diesen Token in deinen Nutzereinstellungen finden"
+                },
+                "domains": {
+                    "name": "Domain (Optional)",
+                    "description": "Überschreibt die Standard-Domain(s). Gib eine oder mehrere Domains durch Kommas getrennt ein. Mit einer Liste an Domains wird Zipline zufällig eine auswählen, die für den Upload verwendet wird.\nBeispiel: §bmedia.example.com,media2.example.com"
+                },
+                "nameFormat": {
+                    "name": "Namensformat",
+                    "description": "Das Dateinamensformat welches für Screenshot-Uploads verwendet wird.",
+                    "entries": {
+                        "name": "Datei name",
+                        "random": "Zufällig",
+                        "randomWords": "Zufällige Wörter",
+                        "date": "Datum",
+                        "uuid": "UUID"
+                    }
+                },
+                "compression": {
+                    "name": "Bildkompression in %",
+                    "description": "Das Kompressionslevel welches für Uploads verwendet wird."
+                }
+            }
+        },
+        "upload": {
+            "file": "Datei nicht gefunden!",
+            "madeScreenshot": "Du hast einen Screenshot gemacht!",
+            "uploadQuestion": "Willst du ihn hochladen?",
+            "alreadyUploaded": "Du hast das Uploadmenü für diesen Screenshot bereits geöffnet!",
+            "openAnyway": "Willst du es trotzdem öffnen?",
+            "upload": "%s hochladen"
+        },
+        "activity": {
+            "title": "Screenshot hochladen",
+            "invalidConfig": "Dieser Uploader hat ungültige Optionen. Bitte überprüfe die jeweilige Konfiguration nach Fehlern.",
+            "upload": "Hochladen",
+            "uploading": "Lädt hoch",
+            "error": "Fehler",
+            "checkTheLog": "Bitte überprüfe den Log für mehr Details.",
+            "copy": "Kopieren",
+            "uploaded": "Dein Screenshot wurde erfolgreich auf %s hochgeladen!",
+            "copied": "Der Link wurde in deine Zwischenablage kopiert!"
+        },
+        "notification": {
+            "success": "Erfolg!",
+            "error": "Ein Fehler ist aufgetreten!"
+        }
+    }
+}

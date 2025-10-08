@@ -1,0 +1,90 @@
+{
+    "screenshotuploader": {
+        "settings": {
+            "header": {
+                "uploaders": {
+                    "name": "Uploader Settings"
+                }
+            },
+            "enabled": {
+                "name": "Enabled"
+            },
+            "askBeforeDoubleUploads": {
+                "name": "Ask before duplicate uploads"
+            },
+            "general": {
+                "baseUrl": {
+                    "name": "Base URL",
+                    "description": "Scheme: §bhttp(s)://<base>\n§fExample: §bhttps://media.rappytv.com"
+                }
+            },
+            "imgur": {
+                "name": "Imgur Options",
+                "auth": {
+                    "name": "Client ID (optional)"
+                }
+            },
+            "xbackbone": {
+                "name": "XBackBone Options",
+                "auth": {
+                    "name": "XBackBone Token",
+                    "description": "You can find this token in your user profile"
+                }
+            },
+            "zipline": {
+                "name": "Zipline Options",
+                "header": {
+                    "settings": {
+                        "name": "Upload settings"
+                    }
+                },
+                "auth": {
+                    "name": "Zipline Token",
+                    "description": "You can find this Token in your user settings"
+                },
+                "domains": {
+                    "name": "Domain (Optional)",
+                    "description": "Override the default domain(s). Type one or more domains separated by commas. Given a comma separated list of domains, Zipline will randomly select one of the domains from that list to use for the upload.\nExample: §bmedia.example.com,media2.example.com"
+                },
+                "nameFormat": {
+                    "name": "Name Format",
+                    "description": "The file name format to use when uploading files.",
+                    "entries": {
+                        "name": "File name",
+                        "random": "Random",
+                        "randomWords": "Random words",
+                        "date": "Date",
+                        "uuid": "UUID"
+                    }
+                },
+                "compression": {
+                    "name": "Image Compression in %",
+                    "description": "The compression level to use when uploading files."
+                }
+            }
+        },
+        "upload": {
+            "file": "File not found!",
+            "madeScreenshot": "You made a screenshot!",
+            "uploadQuestion": "Want to upload it?",
+            "alreadyUploaded": "You've already opened the menu for this screenshot!",
+            "openAnyway": "Want to open it anyway?",
+            "upload": "Upload %s"
+        },
+        "activity": {
+            "title": "Upload Screenshot",
+            "invalidConfig": "This uploader has invalid config options. Please check the corresponding config for issues.",
+            "upload": "Upload",
+            "uploading": "Uploading",
+            "error": "Error",
+            "checkTheLog": "Please check the log for more details.",
+            "copy": "Copy",
+            "uploaded": "Your screenshot was successfully uploaded to %s!",
+            "copied": "The link was copied to your clipboard!"
+        },
+        "notification": {
+            "success": "Success!",
+            "error": "An error ocurred!"
+        }
+    }
+}
