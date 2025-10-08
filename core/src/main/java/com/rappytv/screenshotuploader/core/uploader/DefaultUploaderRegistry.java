@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.inject.Singleton;
 import net.labymod.api.configuration.loader.Config;
 import net.labymod.api.models.Implements;
+import org.jetbrains.annotations.Nullable;
 
 @Singleton
 @Implements(UploaderRegistry.class)
@@ -17,7 +18,7 @@ public class DefaultUploaderRegistry implements UploaderRegistry {
     private final Map<String, Uploader<? extends Config>> uploaders = new HashMap<>();
 
     @Override
-    public void registerUploader(Uploader<? extends Config> uploader) {
+    public void registerUploader(Uploader<? extends Config> uploader) throws IllegalArgumentException {
         if(this.uploaders.containsKey(uploader.getId())) {
             throw new IllegalStateException("Uploader " + uploader.getName() + " is already registered");
         }
@@ -27,5 +28,10 @@ public class DefaultUploaderRegistry implements UploaderRegistry {
     @Override
     public Collection<Uploader<? extends Config>> getUploaders() {
         return Collections.unmodifiableCollection(this.uploaders.values());
+    }
+
+    @Override
+    public @Nullable Uploader<? extends Config> getUploader(String id) {
+        return this.uploaders.get(id);
     }
 }
