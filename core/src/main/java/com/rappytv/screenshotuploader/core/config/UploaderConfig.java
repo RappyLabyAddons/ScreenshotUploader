@@ -14,23 +14,23 @@ import net.labymod.api.configuration.settings.annotation.SettingSection;
 @SpriteTexture("settings")
 public class UploaderConfig extends AddonConfig {
 
-    @SpriteSlot(size = 32)
+    @SpriteSlot
     @SwitchSetting
     private final ConfigProperty<Boolean> enabled = new ConfigProperty<>(true);
 
-    @SpriteSlot(size = 32, x = 1)
+    @SpriteSlot(x = 1)
     @SwitchSetting
     private final ConfigProperty<Boolean> askBeforeDoubleUploads = new ConfigProperty<>(true);
 
     @SettingSection("uploaders")
     @IntroducedIn(namespace = "screenshotuploader", value = "1.0.4")
-    @SpriteSlot(size = 32, y = 1, x = 1)
+    @SpriteSlot(size = 32, y = 1)
     private final ImgurConfig imgur = new ImgurConfig();
 
-    @SpriteSlot(size = 32, y = 1, x = 2)
+    @SpriteSlot(size = 32, x = 1, y = 1)
     private final XBackBoneConfig xbackbone = new XBackBoneConfig();
 
-    @SpriteSlot(size = 32, y = 1, x = 3)
+    @SpriteSlot(size = 32, x = 2, y = 1)
     private final ZiplineConfig zipline = new ZiplineConfig();
 
     @Override
