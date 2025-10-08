@@ -5,6 +5,7 @@ import com.rappytv.screenshotuploader.core.config.subconfig.XBackBoneConfig;
 import com.rappytv.screenshotuploader.core.config.subconfig.ZiplineConfig;
 import net.labymod.api.addon.AddonConfig;
 import net.labymod.api.client.gui.screen.widget.widgets.input.SwitchWidget.SwitchSetting;
+import net.labymod.api.configuration.loader.annotation.IntroducedIn;
 import net.labymod.api.configuration.loader.annotation.SpriteSlot;
 import net.labymod.api.configuration.loader.annotation.SpriteTexture;
 import net.labymod.api.configuration.loader.property.ConfigProperty;
@@ -22,6 +23,7 @@ public class UploaderConfig extends AddonConfig {
     private final ConfigProperty<Boolean> askBeforeDoubleUploads = new ConfigProperty<>(true);
 
     @SettingSection("uploaders")
+    @IntroducedIn(namespace = "screenshotuploader", value = "1.0.4")
     @SpriteSlot(size = 32, y = 1, x = 1)
     private final ImgurConfig imgur = new ImgurConfig();
 

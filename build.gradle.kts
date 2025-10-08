@@ -6,7 +6,7 @@ plugins {
 val versions = providers.gradleProperty("net.labymod.minecraft-versions").get().split(";")
 
 group = "org.example"
-version = providers.environmentVariable("VERSION").getOrElse("1.0.3")
+version = providers.environmentVariable("VERSION").getOrElse("1.0.4")
 
 labyMod {
     defaultPackageName = "com.rappytv.screenshotuploader"
@@ -16,7 +16,7 @@ labyMod {
         author = "RappyTV"
         description = "Upload your minecraft screenshots to your custom destinations."
         minecraftVersion = "*"
-        version = System.getenv().getOrDefault("VERSION", "1.0.3")
+        version = rootProject.version.toString()
     }
 
     minecraft {

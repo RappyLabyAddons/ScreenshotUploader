@@ -30,6 +30,7 @@ public class ScreenshotUploaderAddon extends LabyAddon<UploaderConfig> {
     @Override
     protected void preConfigurationLoad() {
         Laby.references().revisionRegistry().register(new SimpleRevision("screenshotuploader", new SemanticVersion("1.0.3"), "2024-03-09"));
+        Laby.references().revisionRegistry().register(new SimpleRevision("screenshotuploader", new SemanticVersion("1.0.4"), "2025-10-10"));
     }
 
     @Override
