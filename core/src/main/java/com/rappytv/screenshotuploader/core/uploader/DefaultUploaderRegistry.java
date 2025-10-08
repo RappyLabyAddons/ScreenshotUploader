@@ -18,6 +18,9 @@ public class DefaultUploaderRegistry implements UploaderRegistry {
 
     @Override
     public void registerUploader(Uploader<? extends Config> uploader) {
+        if(this.uploaders.containsKey(uploader.getId())) {
+            throw new IllegalStateException("Uploader " + uploader.getName() + " is already registered");
+        }
         this.uploaders.put(uploader.getId(), uploader);
     }
 

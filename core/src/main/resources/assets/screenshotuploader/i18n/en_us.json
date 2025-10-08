@@ -94,7 +94,7 @@
         },
         "activity": {
             "title": "Upload Screenshot",
-            "invalidConfig": "Check config",
+            "invalidConfig": "This uploader has invalid config options. Please check the corresponding config for issues.",
             "upload": "Upload",
             "uploading": "Uploading",
             "error": "Error",
