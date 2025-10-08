@@ -87,21 +87,22 @@ public class ZiplineUploader extends Uploader<ZiplineConfig> {
 
         try {
             int statusCode = response.getStatusCode();
-            JsonObject body = response.get().getAsJsonObject();
+            JsonObject body = response.get();
 
             if(statusCode != 200) {
-                if(body != null) {
-                    if(body.has("message")) {
-                        throw new UploadException(body.get("message").getAsString(), this);
-                    } else if(body.has("error")) {
-                        throw new UploadException(body.get("error").getAsString(), this);
-                    }
+                String message;
+                if (body.has("message")) {
+                    message = body.get("message").getAsString();
+                } else if (body.has("error")) {
+                    message = body.get("error").getAsString();
+                } else {
+                    message = "Failed to upload file with status " + statusCode;
                 }
 
-                throw new UploadException("Failed to upload file with status " + statusCode, this);
+                throw new UploadException(message, this);
             }
 
-            if(body != null && body.has("files")) {
+            if(body.has("files")) {
                 JsonArray files = body.getAsJsonArray("files");
                 if(!files.isEmpty()) {
                     return files.get(0).getAsJsonObject().get("url").getAsString();

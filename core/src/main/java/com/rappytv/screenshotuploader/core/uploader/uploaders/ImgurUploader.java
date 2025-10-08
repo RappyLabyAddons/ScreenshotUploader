@@ -1,6 +1,5 @@
 package com.rappytv.screenshotuploader.core.uploader.uploaders;
 
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.rappytv.screenshotuploader.api.ScreenshotUploaderTextures.SpriteUploaders;
 import com.rappytv.screenshotuploader.api.UploadException;
@@ -76,6 +75,9 @@ public class ImgurUploader extends Uploader<ImgurConfig> {
             throw new UploadException(e, this);
         }
 
+        // I honestly don't know how the client id stuff works so ignore all this stuff
+        // When uploading images via the Imgur website it sends a client id via a query parameter
+        // while the docs state that you need to pass it as a header so I just do both
         String auth = this.getConfig().auth().get();
         String clientId = !auth.isBlank() ? auth : Laby.labyAPI().getUniqueId().toString();
 
@@ -91,11 +93,9 @@ public class ImgurUploader extends Uploader<ImgurConfig> {
             throw new UploadException(response.exception(), this);
         }
 
-        JsonElement body = response.get();
-
         try {
             int statusCode = response.getStatusCode();
-            JsonObject data = body.getAsJsonObject().get("data").getAsJsonObject();
+            JsonObject data = response.get().get("data").getAsJsonObject();
 
             if(statusCode != 200) {
                 if(data != null && data.has("error")) {

@@ -46,7 +46,7 @@ public class XBackBoneUploader extends Uploader<XBackBoneConfig> {
     }
 
     @Override
-    public String uploadScreenshot(File file) throws UploadException { // TODO: This needs to be tested
+    public String uploadScreenshot(File file) throws UploadException {
         FormData fileData;
 
         try {
@@ -60,11 +60,19 @@ public class XBackBoneUploader extends Uploader<XBackBoneConfig> {
             throw new UploadException(e, this);
         }
 
+        String token = this.getConfig().auth().get();
+
         Response<JsonObject> response = Request.ofGson(JsonObject.class)
             .url(this.getConfig().base().get() + "/upload")
             .method(Method.POST)
-            .addHeader("token", this.getConfig().auth().get())
-            .form(fileData)
+            .addHeader("token", token) // To support older XBackBone versions
+            .form(
+                fileData,
+                FormData.builder()
+                    .name("token")
+                    .value(token)
+                    .build()
+            )
             .handleErrorStream()
             .executeSync();
 
@@ -74,17 +82,17 @@ public class XBackBoneUploader extends Uploader<XBackBoneConfig> {
 
         try {
             int statusCode = response.getStatusCode();
-            JsonObject body = response.get().getAsJsonObject();
+            JsonObject body = response.get();
 
-            if(statusCode != 200) {
-                if(body != null && body.has("message")) {
+            if(!(statusCode >= 200 && statusCode < 300)) {
+                if(body.has("message")) {
                     throw new UploadException(body.get("message").getAsString(), this);
                 }
 
                 throw new UploadException("Failed to upload file with status " + statusCode, this);
             }
 
-            if(body != null && body.has("url")) {
+            if(body.has("url")) {
                 return body.get("url").getAsString();
             }
 
