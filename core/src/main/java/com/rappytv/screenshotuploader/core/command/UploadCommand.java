@@ -1,18 +1,17 @@
 package com.rappytv.screenshotuploader.core.command;
 
 import com.rappytv.screenshotuploader.core.ScreenshotUploaderAddon;
-import com.rappytv.screenshotuploader.core.activity.UploadActivity;
+import com.rappytv.screenshotuploader.core.ui.activity.UploadActivity;
+import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 import net.labymod.api.Laby;
 import net.labymod.api.client.chat.command.Command;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.event.ClickEvent;
 import net.labymod.api.client.component.event.HoverEvent;
 import net.labymod.api.client.component.format.NamedTextColor;
-import net.labymod.api.client.component.format.Style;
 import net.labymod.api.client.component.format.TextDecoration;
-import java.io.File;
-import java.util.HashSet;
-import java.util.Set;
 
 public class UploadCommand extends Command {
 
@@ -27,34 +26,40 @@ public class UploadCommand extends Command {
     @Override
     public boolean execute(String prefix, String[] args) {
         if(args.length < 1) {
-            this.displayMessage(ScreenshotUploaderAddon.prefix().append(Component.translatable("uploader.upload.file", NamedTextColor.RED)));
+            this.displayMessage(ScreenshotUploaderAddon.prefix().append(Component.translatable("screenshotuploader.upload.file", NamedTextColor.RED)));
             return true;
         }
         File file = new File(System.getProperty("user.dir") + "/screenshots/" + args[0]);
         if(!file.exists()) {
-            this.displayMessage(ScreenshotUploaderAddon.prefix().append(Component.translatable("uploader.upload.file", NamedTextColor.RED)));
+            this.displayMessage(ScreenshotUploaderAddon.prefix().append(Component.translatable("screenshotuploader.upload.file", NamedTextColor.RED)));
             return true;
         }
         if(this.history.contains(file.getName()) && this.addon.configuration().askBeforeDoubleUploads().get()) {
             if(args.length < 2 || !args[1].equalsIgnoreCase("force")) {
-                this.displayMessage(ScreenshotUploaderAddon.prefix().append(
-                    Component.translatable(
-                        "screenshotuploader.upload.already",
-                        NamedTextColor.RED,
-                        Component.translatable(
-                            "screenshotuploader.upload.openAnyway",
-                            Style.empty()
-                                .color(NamedTextColor.RED)
-                                .decorate(TextDecoration.UNDERLINED)
-                                .hoverEvent(HoverEvent.showText(Component.translatable("screenshotuploader.upload.hover", NamedTextColor.GREEN)))
-                                .clickEvent(ClickEvent.runCommand(String.format(
-                                    "/%s %s force",
-                                    prefix,
-                                    file.getName()
-                                )))
-                        )
+                Component component = Component.empty()
+                    .append(ScreenshotUploaderAddon.prefix())
+                    .append(Component.translatable(
+                        "screenshotuploader.upload.alreadyUploaded",
+                        NamedTextColor.RED
                     ))
-                );
+                    .append(Component.space())
+                    .append(
+                        Component.translatable("screenshotuploader.upload.openAnyway")
+                            .color(NamedTextColor.AQUA)
+                            .decorate(TextDecoration.UNDERLINED)
+                            .hoverEvent(HoverEvent.showText(Component.translatable(
+                                "screenshotuploader.upload.upload",
+                                NamedTextColor.GREEN,
+                                Component.text(file.getName())
+                            )))
+                            .clickEvent(ClickEvent.runCommand(String.format(
+                                "/%s %s force",
+                                prefix,
+                                file.getName()
+                            )))
+                    );
+
+                this.displayMessage(component);
                 return true;
             }
         }

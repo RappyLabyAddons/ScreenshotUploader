@@ -1,6 +1,5 @@
 package com.rappytv.screenshotuploader.core.config;
 
-import com.rappytv.screenshotuploader.core.config.subconfig.EShareSubconfig;
 import com.rappytv.screenshotuploader.core.config.subconfig.XBackBoneSubconfig;
 import com.rappytv.screenshotuploader.core.config.subconfig.ZiplineSubconfig;
 import net.labymod.api.addon.AddonConfig;
@@ -22,9 +21,6 @@ public class UploaderConfig extends AddonConfig {
     private final ConfigProperty<Boolean> askBeforeDoubleUploads = new ConfigProperty<>(true);
 
     @SettingSection("uploaders")
-    @SpriteSlot(size = 32, y = 1)
-    private final EShareSubconfig eshare = new EShareSubconfig();
-
     @SpriteSlot(size = 32, y = 1, x = 2)
     private final XBackBoneSubconfig xbackbone = new XBackBoneSubconfig();
 
@@ -38,10 +34,6 @@ public class UploaderConfig extends AddonConfig {
 
     public ConfigProperty<Boolean> askBeforeDoubleUploads() {
         return this.askBeforeDoubleUploads;
-    }
-
-    public EShareSubconfig eshare() {
-        return this.eshare;
     }
 
     public XBackBoneSubconfig xbackbone() {

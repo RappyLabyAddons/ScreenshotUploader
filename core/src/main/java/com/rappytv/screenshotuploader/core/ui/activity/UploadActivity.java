@@ -1,8 +1,9 @@
-package com.rappytv.screenshotuploader.core.activity;
+package com.rappytv.screenshotuploader.core.ui.activity;
 
-import com.rappytv.screenshotuploader.api.ApiRequest;
+import com.rappytv.screenshotuploader.api.UploadException;
 import com.rappytv.screenshotuploader.api.Uploader;
-import com.rappytv.screenshotuploader.api.Uploaders;
+import com.rappytv.screenshotuploader.core.ScreenshotUploaderAddon;
+import java.io.File;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
@@ -18,7 +19,7 @@ import net.labymod.api.client.gui.screen.widget.widgets.layout.list.HorizontalLi
 import net.labymod.api.client.gui.screen.widget.widgets.layout.list.VerticalListWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.renderer.IconWidget;
 import net.labymod.api.notification.Notification;
-import java.io.File;
+import net.labymod.api.util.concurrent.task.Task;
 
 @Link("upload.lss")
 @AutoActivity
@@ -41,62 +42,58 @@ public class UploadActivity extends SimpleActivity {
 
         headerWidget.addEntry(titleWidget);
 
-        for(Uploaders uploaderId : Uploaders.values()) {
-            Uploader uploader = uploaderId.getUploader();
-
+        for(Uploader<?> uploader : ScreenshotUploaderAddon.uploaderRegistry().getUploaders()) {
             HorizontalListWidget uploaderWidget = new HorizontalListWidget().addId("uploader");
             IconWidget icon = new IconWidget(uploader.getIcon()).addId("icon");
             ComponentWidget name = ComponentWidget.text(uploader.getName()).addId("name");
             ButtonWidget button = new ButtonWidget().addId("button");
-            if(uploader.getHeaders()[1].isBlank()) {
+            if(!uploader.validateConfig()) {
                 button.setEnabled(false);
-                button.updateComponent(Component.translatable("uploader.activity.noAuth", NamedTextColor.RED));
-            } else button.updateComponent(Component.translatable("uploader.activity.button"));
+                button.updateComponent(Component.translatable("screenshotuploader.activity.invalidConfig", NamedTextColor.RED));
+            } else button.updateComponent(Component.translatable("screenshotuploader.activity.upload"));
 
             button.setActionListener(() -> {
                 button.setEnabled(false);
-                button.updateComponent(Component.translatable("uploader.activity.uploading", NamedTextColor.AQUA));
-                ApiRequest request = new ApiRequest(uploader, this.file);
-                request.sendAsyncRequest().thenAccept((result) -> {
-                    if(request.isSuccessful()) {
-                        button.setEnabled(true);
-                        button.updateComponent(Component.translatable("uploader.activity.copy", NamedTextColor.GREEN));
+                button.updateComponent(Component.translatable("screenshotuploader.activity.uploading", NamedTextColor.AQUA));
+                Task.builder(() -> {
+                    try {
+                        String url = uploader.uploadScreenshot(this.file);
+
+                        Laby.labyAPI().minecraft().executeOnRenderThread(() -> {
+                            button.setEnabled(true);
+                            button.updateComponent(Component.translatable("screenshotuploader.activity.copy", NamedTextColor.GREEN));
+                        });
                         Laby.labyAPI().notificationController().push(
                             Notification.builder()
-                                .title(Component.translatable("uploader.toast.success"))
-                                .text(Component.translatable("uploader.activity.uploaded", Component.text(uploader.getName())))
+                                .title(Component.translatable("screenshotuploader.notification.success"))
+                                .text(Component.translatable("screenshotuploader.activity.uploaded", Component.text(uploader.getName())))
                                 .build()
                         );
                         button.setActionListener(() -> {
                             Laby.labyAPI().notificationController().push(
                                 Notification.builder()
-                                    .title(Component.translatable("uploader.toast.success"))
-                                    .text(Component.translatable("uploader.activity.copied"))
+                                    .title(Component.translatable("screenshotuploader.notification.success"))
+                                    .text(Component.translatable("screenshotuploader.activity.copied"))
                                     .build()
                             );
-                            Laby.labyAPI().minecraft().chatExecutor().copyToClipboard(!request.getUploadLink().isBlank() ? request.getUploadLink() : "");
+                            if(!url.isBlank()) {
+                                Laby.labyAPI().minecraft().chatExecutor().copyToClipboard(url);
+                            }
                         });
-                    } else {
-                        button.setEnabled(true);
-                        button.updateComponent(Component.translatable("uploader.activity.error", NamedTextColor.RED));
+                    } catch (UploadException e) {
+                        ScreenshotUploaderAddon.logging().error("Failed to upload screenshot to " + e.getUploader().getName(), e);
+                        Laby.labyAPI().minecraft().executeOnRenderThread(() -> {
+                            button.setEnabled(true);
+                            button.updateComponent(Component.translatable("screenshotuploader.activity.error", NamedTextColor.RED));
+                        });
                         Laby.labyAPI().notificationController().push(
                             Notification.builder()
-                                .title(Component.translatable("uploader.toast.error"))
-                                .text(Component.text(request.getError()))
+                                .title(Component.translatable("screenshotuploader.notification.error"))
+                                .text(Component.translatable("screenshotuploader.activity.checkTheLog"))
                                 .build()
                         );
                     }
-                }).exceptionally((e) -> {
-                    button.setEnabled(true);
-                    button.updateComponent(Component.translatable("uploader.activity.error", NamedTextColor.RED));
-                    Laby.labyAPI().notificationController().push(
-                        Notification.builder()
-                            .title(Component.translatable("uploader.toast.error"))
-                            .text(Component.text(e.getMessage()))
-                            .build()
-                    );
-                    return null;
-                });
+                }).build().execute();
             });
 
             uploaderWidget.addEntry(icon);

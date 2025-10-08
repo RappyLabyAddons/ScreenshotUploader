@@ -57,17 +57,17 @@
                 },
                 "domains": {
                     "name": "Domain (Optional)",
-                    "description": "Override the default domain(s). Type in a URL, e.g example.com"
+                    "description": "Override the default domain(s).Type one or more domains separated by commas. Given a comma separated list of domains, Zipline will randomly select one of the domains from that list to use like above.\nExample: §bmedia.example.com,media2.example.com"
                 },
                 "nameFormat": {
                     "name": "Name Format",
                     "description": "The file name format to use when uploading files.",
                     "entries": {
-                        "default": "Default",
+                        "name": "File name",
                         "random": "Random",
+                        "randomWords": "Random words",
                         "date": "Date",
-                        "uuid": "UUID",
-                        "gfycat": "Gfycat"
+                        "uuid": "UUID"
                     }
                 },
                 "zeroWidth": {
@@ -85,31 +85,27 @@
             }
         },
         "upload": {
-            "noToken": "Please provide the API Key for your uploader in the addon config.",
             "file": "File not found!",
-            "already": "You've already opened the menu for this screenshot! %s",
+            "madeScreenshot": "You made a screenshot!",
+            "uploadQuestion": "Want to upload it?",
+            "alreadyUploaded": "You've already opened the menu for this screenshot!",
             "openAnyway": "Want to open it anyway?",
-            "upload": "Click here to upload the screenshot!",
-            "hover": "Clickable",
-            "emptyError": "Empty error!",
-            "xError": "An unknown error ocurred! Please check your XBackBone configuration!",
-            "ziplineError": "An unknown error ocurred! Please check your Zipline configuration!"
+            "upload": "Upload %s"
         },
         "activity": {
             "title": "Upload Screenshot",
-            "noAuth": "No Auth",
-            "button": "Upload",
+            "invalidConfig": "Check config",
+            "upload": "Upload",
             "uploading": "Uploading",
-            "copy": "Copy",
             "error": "Error",
+            "checkTheLog": "Please check the log for more details.",
+            "copy": "Copy",
             "uploaded": "Your screenshot was successfully uploaded to %s!",
             "copied": "The link was copied to your clipboard!"
         },
-        "toast": {
+        "notification": {
             "success": "Success!",
-            "error": "An error ocurred!",
-            "http": "The base must start with http:// or https://",
-            "slash": "The base must not end with a /"
+            "error": "An error ocurred!"
         }
     }
 }
