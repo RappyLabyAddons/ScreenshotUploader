@@ -60,7 +60,6 @@
                     }
                 },
                 "embed": {
-                    "name": "Embed",
                     "description": "Whether or not to embed uploaded files with OG tags."
                 },
                 "compression": {
