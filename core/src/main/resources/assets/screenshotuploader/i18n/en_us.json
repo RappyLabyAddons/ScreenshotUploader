@@ -1,7 +1,6 @@
 {
     "screenshotuploader": {
         "settings": {
-            "name": "Screenshot Uploader",
             "header": {
                 "uploaders": {
                     "name": "Uploader Settings"
