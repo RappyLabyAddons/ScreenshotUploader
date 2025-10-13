@@ -5,6 +5,7 @@ import com.rappytv.screenshotuploader.api.generated.ReferenceStorage;
 import com.rappytv.screenshotuploader.core.command.UploadCommand;
 import com.rappytv.screenshotuploader.core.config.UploaderConfig;
 import com.rappytv.screenshotuploader.core.listener.ScreenshotListener;
+import com.rappytv.screenshotuploader.core.uploader.uploaders.CraftShotUploader;
 import com.rappytv.screenshotuploader.core.uploader.uploaders.ImgurUploader;
 import com.rappytv.screenshotuploader.core.uploader.uploaders.XBackBoneUploader;
 import com.rappytv.screenshotuploader.core.uploader.uploaders.ZiplineUploader;
@@ -40,6 +41,7 @@ public class ScreenshotUploaderAddon extends LabyAddon<UploaderConfig> {
         this.registerSettingCategory();
         this.registerCommand(new UploadCommand(this));
         this.registerListener(new ScreenshotListener());
+        uploaderRegistry().registerUploader(new CraftShotUploader());
         uploaderRegistry().registerUploader(new ImgurUploader(this));
         uploaderRegistry().registerUploader(new XBackBoneUploader(this));
         uploaderRegistry().registerUploader(new ZiplineUploader(this));

@@ -63,13 +63,20 @@
                 }
             }
         },
-        "upload": {
-            "file": "File not found!",
+        "event": {
             "madeScreenshot": "You made a screenshot!",
             "uploadQuestion": "Want to upload it?",
+            "notification": {
+                "title": "Screenshot Uploader",
+                "description": "Do you want to upload the screenshot you just took?",
+                "button": "Upload"
+            }
+        },
+        "command": {
+            "fileNotFound": "File not found!",
             "alreadyUploaded": "You've already opened the menu for this screenshot!",
             "openAnyway": "Want to open it anyway?",
-            "upload": "Upload %s"
+            "uploadFile": "Upload %s"
         },
         "activity": {
             "title": "Upload Screenshot",

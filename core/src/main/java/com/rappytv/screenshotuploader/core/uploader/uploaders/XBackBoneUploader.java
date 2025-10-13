@@ -40,7 +40,7 @@ public class XBackBoneUploader extends Uploader<XBackBoneConfig> {
         String auth = this.getConfig().auth().get();
 
         return !base.isBlank()
-            && base.startsWith("https://")
+            && (base.startsWith("https://") || base.startsWith("http://"))
             && !base.endsWith("/")
             && !auth.isBlank();
     }

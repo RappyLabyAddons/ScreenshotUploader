@@ -63,13 +63,20 @@
                 }
             }
         },
-        "upload": {
-            "file": "Datei nicht gefunden!",
+        "event": {
             "madeScreenshot": "Du hast einen Screenshot gemacht!",
             "uploadQuestion": "Willst du ihn hochladen?",
+            "notification": {
+                "title": "Screenshot Uploader",
+                "description": "Möchtest du den Screenshot hochladen, den du gerade gemacht hast?",
+                "button": "Hochladen"
+            }
+        },
+        "command": {
+            "fileNotFound": "Datei nicht gefunden!",
             "alreadyUploaded": "Du hast das Uploadmenü für diesen Screenshot bereits geöffnet!",
             "openAnyway": "Willst du es trotzdem öffnen?",
-            "upload": "%s hochladen"
+            "uploadFile": "%s hochladen"
         },
         "activity": {
             "title": "Screenshot hochladen",
