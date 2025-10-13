@@ -41,7 +41,7 @@ public class ZiplineUploader extends Uploader<ZiplineConfig> {
         String auth = this.getConfig().auth().get();
 
         return !base.isBlank()
-            && base.startsWith("https://")
+            && (base.startsWith("https://") || base.startsWith("http://"))
             && !base.endsWith("/")
             && !auth.isBlank();
     }

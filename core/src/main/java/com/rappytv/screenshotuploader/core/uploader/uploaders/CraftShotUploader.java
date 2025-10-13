@@ -31,7 +31,7 @@ public class CraftShotUploader extends Uploader<EmptyConfig> {
     }
 
     @Override
-    public Icon getIcon() { // TODO: Add icon
+    public Icon getIcon() {
         return SpriteUploaders.CRAFTSHOT;
     }
 
