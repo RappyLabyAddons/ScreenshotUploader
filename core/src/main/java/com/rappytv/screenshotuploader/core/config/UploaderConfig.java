@@ -24,13 +24,13 @@ public class UploaderConfig extends AddonConfig {
 
     @SettingSection("uploaders")
     @IntroducedIn(namespace = "screenshotuploader", value = "1.0.4")
-    @SpriteSlot(size = 32, y = 1)
+    @SpriteSlot(size = 32, x = 1, y = 1)
     private final ImgurConfig imgur = new ImgurConfig();
 
-    @SpriteSlot(size = 32, x = 1, y = 1)
+    @SpriteSlot(size = 32, x = 2, y = 1)
     private final XBackBoneConfig xbackbone = new XBackBoneConfig();
 
-    @SpriteSlot(size = 32, x = 2, y = 1)
+    @SpriteSlot(size = 32, x = 3, y = 1)
     private final ZiplineConfig zipline = new ZiplineConfig();
 
     @Override
