@@ -1,0 +1,59 @@
+site_name: ScreenshotUploader Addon
+repo_name: ScreenshotUploader
+repo_url: https://github.com/RappyLabyAddons/ScreenshotUploader
+edit_uri: blob/master/docs/
+
+nav:
+  - Using the API: index.md
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+
+theme:
+  name: material
+  font:
+    text: Roboto
+    code: JetBrains Mono
+  favicon: 'assets/theme/images/icon.png'
+  logo: 'assets/theme/images/icon.png'
+  features:
+    - content.action.edit
+    - content.code.annotate
+    - content.code.copy
+    - content.tabs.link
+    - navigation.expand
+    - navigation.footer
+    - search.share
+  palette:
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      toggle:
+        icon: material/weather-night
+        name: Switch to light mode
+
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+
+extra_css:
+  - assets/stylesheets/extra.css
+
+extra:
+  generator: false

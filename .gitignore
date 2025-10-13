@@ -30,6 +30,7 @@ hs_err_pid*
 # User-specific stuff
 /.idea/
 run/**
+.venv
 
 # CMake
 cmake-build-*/
