@@ -17,6 +17,7 @@ public class XBackBoneConfig extends Config {
     public ConfigProperty<String> base() {
         return this.base;
     }
+
     public ConfigProperty<String> auth() {
         return this.auth;
     }
