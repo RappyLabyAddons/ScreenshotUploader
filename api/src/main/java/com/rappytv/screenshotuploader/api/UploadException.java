@@ -1,5 +1,7 @@
 package com.rappytv.screenshotuploader.api;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * This exception is thrown when an upload fails for whatever reason
  */
@@ -12,7 +14,7 @@ public class UploadException extends RuntimeException {
      * @param message The reason why the upload failed
      * @param uploader The uploader the upload failed with
      */
-    public UploadException(String message, Uploader<?> uploader) {
+    public UploadException(@NotNull String message, @NotNull Uploader<?> uploader) {
         super(message);
         this.uploader = uploader;
     }
@@ -22,7 +24,7 @@ public class UploadException extends RuntimeException {
      * @param cause The reason why the upload failed
      * @param uploader The uploader the upload failed with
      */
-    public UploadException(Throwable cause, Uploader<?> uploader) {
+    public UploadException(@NotNull Throwable cause, @NotNull Uploader<?> uploader) {
         super(cause);
         this.uploader = uploader;
     }
@@ -31,6 +33,7 @@ public class UploadException extends RuntimeException {
      * Get the uploader with which the upload failed
      * @return The uploader the upload failed with
      */
+    @NotNull
     public Uploader<?> getUploader() {
         return this.uploader;
     }

@@ -44,6 +44,7 @@ public class UploaderWidget extends HorizontalListWidget {
 
         button.setActionListener(() -> {
             button.setEnabled(false);
+            button.setHoverComponent(null);
             button.updateComponent(Component.translatable("screenshotuploader.activity.uploading", NamedTextColor.AQUA));
             Task.builder(() -> {
                 try {
@@ -71,6 +72,7 @@ public class UploaderWidget extends HorizontalListWidget {
                         }
                     });
                 } catch (UploadException e) {
+                    button.setHoverComponent(Component.text(e.getMessage(), NamedTextColor.RED));
                     ScreenshotUploaderAddon.logging().error("Failed to upload screenshot to " + e.getUploader().getName(), e);
                     Laby.labyAPI().minecraft().executeOnRenderThread(() -> {
                         button.setEnabled(true);
