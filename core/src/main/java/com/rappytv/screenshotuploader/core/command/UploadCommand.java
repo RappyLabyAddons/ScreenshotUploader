@@ -21,17 +21,25 @@ public class UploadCommand extends Command {
     public UploadCommand(ScreenshotUploaderAddon addon) {
         super("supload");
         this.addon = addon;
+
+        this.translationKey("screenshotuploader.command");
     }
 
     @Override
     public boolean execute(String prefix, String[] args) {
         if(args.length < 1) {
-            this.displayMessage(ScreenshotUploaderAddon.prefix().append(Component.translatable("screenshotuploader.upload.file", NamedTextColor.RED)));
+            this.displayMessage(ScreenshotUploaderAddon.prefix().append(Component.translatable(
+                this.getTranslationKey("fileNotFound"),
+                NamedTextColor.RED
+            )));
             return true;
         }
         File file = new File(System.getProperty("user.dir") + "/screenshots/" + args[0]);
         if(!file.exists()) {
-            this.displayMessage(ScreenshotUploaderAddon.prefix().append(Component.translatable("screenshotuploader.upload.file", NamedTextColor.RED)));
+            this.displayMessage(ScreenshotUploaderAddon.prefix().append(Component.translatable(
+                this.getTranslationKey("fileNotFound"),
+                NamedTextColor.RED
+            )));
             return true;
         }
         if(this.history.contains(file.getName()) && this.addon.configuration().askBeforeDoubleUploads().get()) {
@@ -39,16 +47,16 @@ public class UploadCommand extends Command {
                 Component component = Component.empty()
                     .append(ScreenshotUploaderAddon.prefix())
                     .append(Component.translatable(
-                        "screenshotuploader.upload.alreadyUploaded",
+                        this.getTranslationKey("alreadyUploaded"),
                         NamedTextColor.RED
                     ))
                     .append(Component.space())
                     .append(
-                        Component.translatable("screenshotuploader.upload.openAnyway")
+                        Component.translatable(this.getTranslationKey("openAnyway"))
                             .color(NamedTextColor.AQUA)
                             .decorate(TextDecoration.UNDERLINED)
                             .hoverEvent(HoverEvent.showText(Component.translatable(
-                                "screenshotuploader.upload.upload",
+                                this.getTranslationKey("uploadFile"),
                                 NamedTextColor.GREEN,
                                 Component.text(file.getName())
                             )))
@@ -64,7 +72,9 @@ public class UploadCommand extends Command {
             }
         }
         this.history.add(file.getName());
-        Laby.labyAPI().minecraft().executeNextTick(() -> Laby.labyAPI().minecraft().minecraftWindow().displayScreen(new UploadActivity(file)));
+        Laby.labyAPI().minecraft().executeOnRenderThread(() ->
+            Laby.labyAPI().minecraft().minecraftWindow().displayScreen(new UploadActivity(file))
+        );
         return true;
     }
 }
