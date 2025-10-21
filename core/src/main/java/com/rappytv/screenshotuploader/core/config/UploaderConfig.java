@@ -1,5 +1,6 @@
 package com.rappytv.screenshotuploader.core.config;
 
+import com.rappytv.screenshotuploader.core.config.subconfig.ImageServerConfig;
 import com.rappytv.screenshotuploader.core.config.subconfig.ImgurConfig;
 import com.rappytv.screenshotuploader.core.config.subconfig.XBackBoneConfig;
 import com.rappytv.screenshotuploader.core.config.subconfig.ZiplineConfig;
@@ -23,14 +24,17 @@ public class UploaderConfig extends AddonConfig {
     private final ConfigProperty<Boolean> askBeforeDoubleUploads = new ConfigProperty<>(true);
 
     @SettingSection("uploaders")
-    @IntroducedIn(namespace = "screenshotuploader", value = "1.0.4")
     @SpriteSlot(size = 32, x = 1, y = 1)
+    private final ImageServerConfig imageServer = new ImageServerConfig();
+
+    @IntroducedIn(namespace = "screenshotuploader", value = "1.0.4")
+    @SpriteSlot(size = 32, x = 2, y = 1)
     private final ImgurConfig imgur = new ImgurConfig();
 
-    @SpriteSlot(size = 32, x = 2, y = 1)
+    @SpriteSlot(size = 32, x = 3, y = 1)
     private final XBackBoneConfig xbackbone = new XBackBoneConfig();
 
-    @SpriteSlot(size = 32, x = 3, y = 1)
+    @SpriteSlot(size = 32, y = 2)
     private final ZiplineConfig zipline = new ZiplineConfig();
 
     @Override
@@ -40,6 +44,10 @@ public class UploaderConfig extends AddonConfig {
 
     public ConfigProperty<Boolean> askBeforeDoubleUploads() {
         return this.askBeforeDoubleUploads;
+    }
+
+    public ImageServerConfig imageServer() {
+        return this.imageServer;
     }
 
     public ImgurConfig imgur() {

@@ -1,16 +1,14 @@
 package com.rappytv.screenshotuploader.core.uploader.uploaders;
 
-import com.google.gson.JsonObject;
 import com.rappytv.screenshotuploader.api.ScreenshotUploaderTextures.SpriteUploaders;
 import com.rappytv.screenshotuploader.api.UploadException;
 import com.rappytv.screenshotuploader.api.Uploader;
 import com.rappytv.screenshotuploader.core.ScreenshotUploaderAddon;
-import com.rappytv.screenshotuploader.core.config.subconfig.ImgurConfig;
+import com.rappytv.screenshotuploader.core.config.subconfig.ImageServerConfig;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import net.labymod.api.Laby;
 import net.labymod.api.client.gui.icon.Icon;
 import net.labymod.api.util.io.web.request.FormData;
 import net.labymod.api.util.io.web.request.Request;
@@ -18,25 +16,26 @@ import net.labymod.api.util.io.web.request.Request.Method;
 import net.labymod.api.util.io.web.request.Response;
 import org.jetbrains.annotations.NotNull;
 
-public class ImgurUploader extends Uploader<ImgurConfig> {
+public class ImageServerUploader extends Uploader<ImageServerConfig> {
 
-    private static final String UPLOAD_ENDPOINT = "https://api.imgur.com/3/upload";
+    private static final String AUTHORIZED_ENDPOINT = "https://imageserver.pw/upload";
+    private static final String ADDON_ENDPOINT = "https://imageserver.pw/upload/addon";
 
     private final ScreenshotUploaderAddon addon;
 
-    public ImgurUploader(ScreenshotUploaderAddon addon) {
-        super("imgur", "Imgur");
+    public ImageServerUploader(ScreenshotUploaderAddon addon) {
+        super("imageserver", "imageserver.pw");
         this.addon = addon;
     }
 
     @Override
     public Icon getIcon() {
-        return SpriteUploaders.IMGUR;
+        return SpriteUploaders.IMAGE_SERVER;
     }
 
     @Override
-    public @NotNull ImgurConfig getConfig() {
-        return this.addon.configuration().imgur();
+    public @NotNull ImageServerConfig getConfig() {
+        return this.addon.configuration().imageServer();
     }
 
     @Override
@@ -47,16 +46,11 @@ public class ImgurUploader extends Uploader<ImgurConfig> {
     @Override
     public String uploadScreenshot(File file) throws UploadException {
         List<FormData> formData = new ArrayList<>();
-        formData.add(
-            FormData.builder()
-                .name("title")
-                .value("Screenshot taken by " + Laby.labyAPI().getName())
-                .build()
-        );
+
         if(this.getConfig().addDescription().get()) {
             formData.add(
                 FormData.builder()
-                    .name("description")
+                    .name("title")
                     .value(DESCRIPTION)
                     .build()
             );
@@ -65,8 +59,8 @@ public class ImgurUploader extends Uploader<ImgurConfig> {
         try {
             formData.add(
                 FormData.builder()
-                    .name("image")
-                    .fileName(file.getName())
+                    .name("file")
+                    .fileName("screenshot.png")
                     .contentType("image/png")
                     .value(file.toPath())
                     .build()
@@ -75,17 +69,11 @@ public class ImgurUploader extends Uploader<ImgurConfig> {
             throw new UploadException(e, this);
         }
 
-        // I honestly don't know how the client id stuff works so ignore all this stuff
-        // When uploading images via the Imgur website it sends a client id via a query parameter
-        // while the docs state that you need to pass it as a header so I just do both
-        String auth = this.getConfig().auth().get();
-        String clientId = !auth.isBlank() ? auth : Laby.labyAPI().getUniqueId().toString();
-
-        Response<JsonObject> response = Request.ofGson(JsonObject.class)
-            .url(UPLOAD_ENDPOINT + "?client_id=" + clientId)
+        Response<String> response = Request.ofString()
+            .url(this.getConfig().auth().get().isBlank() ? ADDON_ENDPOINT : AUTHORIZED_ENDPOINT)
             .method(Method.POST)
+            .addHeader("X-IMAGESERVER-AUTH-KEY", this.getConfig().auth().get())
             .form(formData)
-            .addHeader("Authorization", !auth.isBlank() ? "Client-ID " + auth : "")
             .handleErrorStream()
             .executeSync();
 
@@ -95,21 +83,13 @@ public class ImgurUploader extends Uploader<ImgurConfig> {
 
         try {
             int statusCode = response.getStatusCode();
-            JsonObject data = response.get().get("data").getAsJsonObject();
+            String body = response.get();
 
             if(statusCode != 200) {
-                if(data != null && data.has("error")) {
-                    throw new UploadException(data.get("error").getAsString(), this);
-                }
-
-                throw new UploadException("Failed to upload file with status " + statusCode, this);
+                throw new UploadException(body, this);
             }
 
-            if(data != null && data.has("link")) {
-                return data.get("link").getAsString();
-            }
-
-            throw new UploadException("Response body does not contain the file link", this);
+            return body;
         } catch (IllegalArgumentException e) {
             throw new UploadException(e, this);
         }

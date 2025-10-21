@@ -18,6 +18,12 @@
                     "description": "Scheme: §bhttp(s)://<base>\n§fExample: §bhttps://media.rappytv.com"
                 }
             },
+            "imageServer": {
+                "name": "imageserver.pw Options",
+                "auth": {
+                    "name": "Auth Key"
+                }
+            },
             "imgur": {
                 "name": "Imgur Options",
                 "auth": {

@@ -11,6 +11,7 @@ import java.io.File;
  */
 public abstract class Uploader<C extends Config> {
 
+    protected static final String DESCRIPTION = "Uploaded using the ScreenshotUploader LabyMod Addon";
     public static final EmptyConfig EMPTY_CONFIG = new EmptyConfig();
 
     private final String id;
