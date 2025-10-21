@@ -4,7 +4,8 @@ import com.google.gson.JsonObject;
 import com.rappytv.screenshotuploader.api.ScreenshotUploaderTextures.SpriteUploaders;
 import com.rappytv.screenshotuploader.api.UploadException;
 import com.rappytv.screenshotuploader.api.Uploader;
-import com.rappytv.screenshotuploader.api.Uploader.EmptyConfig;
+import com.rappytv.screenshotuploader.core.ScreenshotUploaderAddon;
+import com.rappytv.screenshotuploader.core.config.subconfig.CraftShotConfig;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,12 +23,15 @@ import net.labymod.api.util.io.web.request.Response;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class CraftShotUploader extends Uploader<EmptyConfig> {
+public class CraftShotUploader extends Uploader<CraftShotConfig> {
 
     private static final String UPLOAD_ENDPOINT = "https://craftshot.net/v1/upload";
 
-    public CraftShotUploader() {
+    private final ScreenshotUploaderAddon addon;
+
+    public CraftShotUploader(ScreenshotUploaderAddon addon) {
         super("craftshot", "CraftShot");
+        this.addon = addon;
     }
 
     @Override
@@ -36,8 +40,8 @@ public class CraftShotUploader extends Uploader<EmptyConfig> {
     }
 
     @Override
-    public @NotNull EmptyConfig getConfig() {
-        return EMPTY_CONFIG;
+    public @NotNull CraftShotConfig getConfig() {
+        return this.addon.configuration().craftshot();
     }
 
     @Override
@@ -56,7 +60,7 @@ public class CraftShotUploader extends Uploader<EmptyConfig> {
         formData.add(FormData.builder().name("access_token").value(token).build());
 
         String host = this.getHost();
-        if (host != null) {
+        if (host != null && this.getConfig().addHost().get()) {
             formData.add(FormData.builder().name("server_ip").value(host).build());
         }
 

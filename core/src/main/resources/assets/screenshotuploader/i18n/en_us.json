@@ -18,6 +18,13 @@
                     "description": "Scheme: §bhttp(s)://<base>\n§fExample: §bhttps://media.rappytv.com"
                 }
             },
+            "craftshot": {
+                "name": "CraftShot Options",
+                "addHost": {
+                    "name": "Display host on CraftShot.net",
+                    "description": "Enabling this option will display your current server host next to the screenshot as metadata"
+                }
+            },
             "imageServer": {
                 "name": "imageserver.pw Options",
                 "auth": {

@@ -1,5 +1,6 @@
 package com.rappytv.screenshotuploader.core.config;
 
+import com.rappytv.screenshotuploader.core.config.subconfig.CraftShotConfig;
 import com.rappytv.screenshotuploader.core.config.subconfig.ImageServerConfig;
 import com.rappytv.screenshotuploader.core.config.subconfig.ImgurConfig;
 import com.rappytv.screenshotuploader.core.config.subconfig.XBackBoneConfig;
@@ -24,6 +25,9 @@ public class UploaderConfig extends AddonConfig {
     private final ConfigProperty<Boolean> askBeforeDoubleUploads = new ConfigProperty<>(true);
 
     @SettingSection("uploaders")
+    @SpriteSlot(size = 32, y = 1)
+    private final CraftShotConfig craftshot = new CraftShotConfig();
+
     @SpriteSlot(size = 32, x = 1, y = 1)
     private final ImageServerConfig imageServer = new ImageServerConfig();
 
@@ -44,6 +48,10 @@ public class UploaderConfig extends AddonConfig {
 
     public ConfigProperty<Boolean> askBeforeDoubleUploads() {
         return this.askBeforeDoubleUploads;
+    }
+
+    public CraftShotConfig craftshot() {
+        return this.craftshot;
     }
 
     public ImageServerConfig imageServer() {
